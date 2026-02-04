@@ -264,7 +264,7 @@ export const getCategoriesProduct = async (req, res) => {
         }
         const query = { category: categoryId };
         if (subcategoryId) {
-            query.subCategory = subcategoryId;
+            query.subCategoryId = subcategoryId;
         }
         const product = await Product.find(query)
         return res.json({
