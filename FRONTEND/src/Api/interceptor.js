@@ -59,6 +59,12 @@ export const getProductByCategory = async (id) => {
     const response = await Api.get(`/product/get-product-category?id=${id}`)
     return response.data
 }
+// get products by categoryId (optionally with subcategoryId)
+export const getProductsByCategoryId = async (categoryId, subcategoryId) => {
+    const query = subcategoryId ? `?categoryId=${categoryId}&subcategoryId=${subcategoryId}` : `?categoryId=${categoryId}`;
+    const response = await Api.get(`/product/get-product-cat-sub${query}`)
+    return response.data
+}
 
 
 
@@ -152,7 +158,7 @@ export const addToWishlist = async (productId) => {
         { withCredentials: true }
     );
     return response.data;
-};   
+};
 
 export const removeFromWishlist = async (productId) => {
     const response = await Api.delete(

@@ -7,7 +7,7 @@ import {
     getCart, getData, removeCartItem, updateCartqty,
     addToCart, getCategoryProduct, getProductByCategory, getsubcategory,
     getProductHomePage, addToWishlist, removeFromWishlist, getWishlist,
-    checkWishlist, clearWishlist
+    checkWishlist, clearWishlist, getProductsByCategoryId
 
 } from '../Api/interceptor';
 import AxiosToastError from '../Utils/AxiosToastError';
@@ -202,33 +202,35 @@ const UsesContext = ({ children }) => {
 
 
     // Fetch products by subcategory ID (called when subcategory is clicked)
-    const fetchAllCategoryProducts = async (subcategoryId) => {
+    const fetchAllCategoryProducts = async (categoryId) => {
         try {
-            console.log("Fetching products for subcategory ID:", subcategoryId);
-            const res = await getCategoryProduct(subcategoryId);
-            console.log("Products Response (by subcategory):", res);
-            if (res && res.data && Array.isArray(res.data)) {
-                setProducts(res.data || []);
+            console.log("Fetching products for category ID:", categoryId);
+            const res = await getProductsByCategoryId(categoryId);
+            console.log("Products Response (by category):", res);
+
+            // ✅ Backend returns { success, data: [...] }
+            if (res?.success && Array.isArray(res.data)) {
+                setProducts(res.data);
             } else {
                 setProducts([]);
-                console.warn("No products data in response (by subcategory)");
+                console.warn("No products data in response (by category)");
             }
         } catch (error) {
             console.error("Error fetching category products:", error.message);
             setProducts([]);
         }
     };
-
     const fetchProductsBySubcategory = async (subCategoryId) => {
         try {
             console.log("Fetching products for subcategory:", subCategoryId);
-            const response = await getProductByCategory(subCategoryId);
-            console.log("Products Response:", response);
-            if (response && response.data && Array.isArray(response.data)) {
-                setProducts(response.data || []);
+            const res = await getProductByCategory(subCategoryId);
+            console.log("Products Response (by subcategory):", res);
+
+            if (res?.success && Array.isArray(res.data)) {
+                setProducts(res.data);
             } else {
                 setProducts([]);
-                console.warn("No products data in response");
+                console.warn("No products data in response (by subcategory)");
             }
         } catch (error) {
             console.error("Error fetching products:", error.message);
@@ -244,7 +246,7 @@ const UsesContext = ({ children }) => {
             if (res && res.data && Array.isArray(res.data)) {
                 setSubCategories(res.data || []);
                 // Clear products when fetching new subcategories
-                setProducts([]);
+
             } else {
                 setSubCategories([]);
                 console.warn("No subcategories data in response");
