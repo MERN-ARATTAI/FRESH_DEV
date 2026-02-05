@@ -12,6 +12,24 @@ import { getLogout } from '../Api/interceptor';
 import toast from 'react-hot-toast';
 
 const Header = () => {
+
+
+const [rotateY, setRotateY] = useState(0);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setRotateY(prev => prev + 180);
+  }, 3000); // rotate every 2s
+
+  return () => clearInterval(interval);
+}, []);
+
+
+
+
+
+
+
     const { cartCount, Wishlist, wishlistCount, clearWishlistLocal, clearCartLocal } = useAll()
     const [showLogin, setShowLogin] = useState(false);
     const [user, setUser] = useState(null);
@@ -174,7 +192,8 @@ const Header = () => {
 
         //     {showLogin && <Login onClose={() => setShowLogin(false)} />}
         //     {/* <Outlet /> */}
-        // </>
+        // </>    
+
         <>
             <header className="bg-white sticky top-0 z-50">
 
@@ -184,19 +203,31 @@ const Header = () => {
                 </div>
 
                 {/* Main Header */}
-                <div className="px-4 md:px-8 py-3">
+                <div className="px-4 md:px-6 py-2">
                     <div className="flex items-center justify-between">
 
                         {/* Logo */}
-                        <img
+                        {/* <img
                             src={menzo}
                             alt="logo"
-                            className="w-24 md:w-28 cursor-pointer"
+                            className="w-14 md:w-16 cursor-pointer"
                             onClick={() => navigate("/")}
-                        />
+                        /> */}
+            <img
+  src={menzo}
+  alt="logo"
+  className="w-14 md:w-14 transition-transform duration-[2500ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+  style={{
+    transform: `perspective(1400px) rotateY(${rotateY}deg)`,
+    transformStyle: "preserve-3d",
+  }}
+/>
+
+
+
 
                         {/* Navigation */}
-                        <nav className="hidden md:flex gap-8 text-[16px] font-semibold text-[#0F172A]">
+                        <nav className="hidden md:flex gap-8 text-[15px] font-semibold text-[#0F172A]">
                             <NavLink className="relative group" to="/">
                                 Home
                                 <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] transition-all group-hover:w-full"></span>
@@ -225,7 +256,7 @@ const Header = () => {
                             {/* Wishlist */}
                             <div className="relative cursor-pointer">
                                 <FaRegHeart
-                                    size={26}
+                                    size={24}
                                     className="text-[#0F172A] hover:text-[#1D9C7A]"
                                     onClick={() => navigate("/pages/WishListPage")}
                                 />
@@ -239,7 +270,7 @@ const Header = () => {
                             {/* Cart */}
                             <div className="relative cursor-pointer">
                                 <MdOutlineShoppingCart
-                                    size={26}
+                                    size={24}
                                     className="text-[#0F172A] hover:text-[#1D9C7A]"
                                     onClick={() => navigate("/pages/cartPage")}
                                 />
@@ -262,7 +293,7 @@ const Header = () => {
                                 <div className="relative group flex items-center gap-2 cursor-pointer">
 
                                     {/* Avatar */}
-                                    <div className="w-9 h-9 rounded-full bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white flex items-center justify-center font-bold">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white flex items-center justify-center font-bold">
                                         {user?.name?.charAt(0).toUpperCase()}
                                     </div>
 
