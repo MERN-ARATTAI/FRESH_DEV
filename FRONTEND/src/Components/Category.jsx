@@ -131,7 +131,7 @@ const CategoryCart = () => {
 
                   {/* Category name with animation */}
                   <div className="mt-3 text-center">
-                    <p className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-[#0F172A] group-hover:text-[#1D9C7A] transition-colors duration-300 whitespace-nowrap">
+                    <p className="text-xs sm:text-sm md:text-base lg:text-lg  text-[#0F172A] group-hover:text-[#1D9C7A] transition-colors duration-300 whitespace-nowrap">
                       {item.name}
                     </p>
                     {/* Underline animation */}

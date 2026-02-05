@@ -195,7 +195,7 @@ const Header = () => {
         // </>    
 
         <>
-            <header className="bg-white sticky top-0 z-50">
+            <header className="bg-white sticky top-0 z-50 ">
 
                 {/* Offer Bar – Gradient */}
                 <div className="bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] text-[#0F172A]">

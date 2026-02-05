@@ -116,6 +116,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import contactLogo from "../assets/Logoforcontact.png"
 
 export default function ContactPage() {
   return (
@@ -123,21 +124,21 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="relative h-[50vh] flex items-center justify-center">
         <img
-          src="https://via.placeholder.com/1600x900"
+          src={contactLogo}
           alt="Contact NextGen Men"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-white/75" />
+        <div className="absolute inset-0 " />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="relative z-10 text-center px-4"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Contact Menzo Men-Wear</h1>
+          {/* <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Contact Menzo Men-Wear</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             We’re here to help you with orders, products, and collaborations.
-          </p>
+          </p> */}
         </motion.div>
       </section>
 
