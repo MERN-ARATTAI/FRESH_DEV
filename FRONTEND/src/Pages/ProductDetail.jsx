@@ -67,7 +67,7 @@ const ProductDetail = () => {
     const handleBuyNow = () => {
         if (!isLoggedIn()) {
             toast.error("Please login to continue");
-            navigate("/login", { state: { from: `/checkout/${id}` } });
+            navigate(<Login />, { state: { from: `/checkout/${id}` } });
             return;
         }
 
@@ -165,10 +165,7 @@ const ProductDetail = () => {
                     </div>
                 )}
 
-                {/* Note */}
-                <p className="text-xs text-gray-500 mt-2">
-                    ⚠️ An unboxing video is required for courier-related complaints.
-                </p>
+
 
             </div>
         </div>
