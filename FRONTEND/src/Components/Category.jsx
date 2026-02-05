@@ -72,10 +72,6 @@ const CategoryCart = () => {
           <h2 className="text-xl md:text-2xl font-bold text-[#0F172A] mb-2">
             Shop by Category
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] mx-auto rounded-full"></div>
-          <p className="mt-3 text-[#88C7B3] font-medium">
-            Explore our curated collections
-          </p>
         </div>
 
         {/* Scroll container */}

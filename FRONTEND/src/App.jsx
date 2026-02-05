@@ -11,6 +11,7 @@ import MainLayout from './Layout/MainLayout'
 import CategoryProduct from './Pages/CategoryProduct';
 import CartPage from './Pages/CartPage';
 import ProductsPage from './Pages/Product_Page';
+import ContactPage from './Pages/ContactPage'
 import UsesContext from './GlobalProvider/UsesContext';
 
 import ProductDetail from './Pages/ProductDetail';
@@ -42,6 +43,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path='/about' element={<AboutPage />} />
+            <Route path='/contact' element={<ContactPage />} />
             <Route path="/Product_Page" element={<ProductsPage />} />
             <Route path="/category/:categoryName/:id" element={<CategoryProduct />} />
             <Route path="/product/:id" element={<ProductDetail />} />

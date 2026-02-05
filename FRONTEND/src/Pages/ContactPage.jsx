@@ -134,7 +134,7 @@ export default function ContactPage() {
           transition={{ duration: 0.7 }}
           className="relative z-10 text-center px-4"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Contact NextGen Men</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Contact Menzo Men-Wear</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             We’re here to help you with orders, products, and collaborations.
           </p>

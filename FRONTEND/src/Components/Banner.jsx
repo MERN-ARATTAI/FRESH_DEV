@@ -47,7 +47,7 @@ const BannerImage = () => {
     };
 
     return (
-        <div className="relative w-full min-h-screen overflow-hidden">
+        <div className="relative w-full min-h-screen border-none overflow-hidden">
             <AnimatePresence mode="wait">
                 {banners[index].type === "image" ? (
                     <motion.img
@@ -88,7 +88,7 @@ const BannerImage = () => {
                                     exit={{ opacity: 0, y: 30 }}
                                     transition={{ duration: 0.8 }}
                                 >
-                                    <h1 className="text-black text-9xl md:text-9xl font-bold tracking-wide">
+                                    <h1 className="text-black text-9xl md:text-7xl font-bold tracking-wide">
                                         Our Premium Collection
                                     </h1>
                                 </motion.div>

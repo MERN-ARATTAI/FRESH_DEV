@@ -14,15 +14,15 @@ import toast from 'react-hot-toast';
 const Header = () => {
 
 
-const [rotateY, setRotateY] = useState(0);
+    const [rotateY, setRotateY] = useState(0);
 
-useEffect(() => {
-  const interval = setInterval(() => {
-    setRotateY(prev => prev + 180);
-  }, 3000); // rotate every 2s
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRotateY(prev => prev + 180);
+        }, 3000); // rotate every 2s
 
-  return () => clearInterval(interval);
-}, []);
+        return () => clearInterval(interval);
+    }, []);
 
 
 
@@ -213,21 +213,21 @@ useEffect(() => {
                             className="w-14 md:w-16 cursor-pointer"
                             onClick={() => navigate("/")}
                         /> */}
-            <img
-  src={menzo}
-  alt="logo"
-  className="w-14 md:w-14 transition-transform duration-[2500ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
-  style={{
-    transform: `perspective(1400px) rotateY(${rotateY}deg)`,
-    transformStyle: "preserve-3d",
-  }}
-/>
+                        <img
+                            src={menzo}
+                            alt="logo"
+                            className="w-14 md:w-14 transition-transform duration-[2500ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
+                            style={{
+                                transform: `perspective(1400px) rotateY(${rotateY}deg)`,
+                                transformStyle: "preserve-3d",
+                            }}
+                        />
 
 
 
 
                         {/* Navigation */}
-                        <nav className="hidden md:flex gap-8 text-[15px] font-semibold text-[#0F172A]">
+                        <nav className="hidden md:flex pl-30  gap-8 text-[18px] font-semibold text-[#0F172A]">
                             <NavLink className="relative group" to="/">
                                 Home
                                 <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] transition-all group-hover:w-full"></span>
@@ -248,6 +248,8 @@ useEffect(() => {
                                 <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] transition-all group-hover:w-full"></span>
                             </NavLink>
                         </nav>
+
+
 
 
                         {/* Icons + Auth */}
