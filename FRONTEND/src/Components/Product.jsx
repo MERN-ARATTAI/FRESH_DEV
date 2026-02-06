@@ -61,6 +61,8 @@ const ProductCard = ({ item, onAddToCart, onToggleWishlist, isInWishlist, onView
   )
 }
 
+
+
 const Product = ({ pageMode = false }) => {
   const { Wishlist, handleAddToCart, handleAddToWishlist, handleRemoveFromWishlist } = useAll();
   const navigate = useNavigate();

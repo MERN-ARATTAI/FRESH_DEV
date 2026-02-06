@@ -195,7 +195,7 @@ const Header = () => {
         // </>    
 
         <>
-            <header className="bg-white sticky top-0 z-50 ">
+            <header className="bg-white sticky top-0 z-50">
 
                 {/* Offer Bar – Gradient */}
                 <div className="bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] text-[#0F172A]">
@@ -227,7 +227,7 @@ const Header = () => {
 
 
                         {/* Navigation */}
-                        <nav className="hidden md:flex pl-30  gap-8 text-[18px] font-semibold text-[#0F172A]">
+                        <nav className="hidden md:flex pl-30 gap-8 text-[16px] font-semibold text-[#0F172A]">
                             <NavLink className="relative group" to="/">
                                 Home
                                 <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] transition-all group-hover:w-full"></span>

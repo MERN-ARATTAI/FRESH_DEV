@@ -1,32 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React from 'react'
 import Header from '../Components/Header'
 import UsesContext from '../GlobalProvider/UsesContext'
