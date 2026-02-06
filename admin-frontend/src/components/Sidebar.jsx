@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Package, 
-  FolderTree, 
+import {
+  LayoutDashboard,
+  Package,
+  FolderTree,
   Tag,
-  ShoppingCart, 
-  Users, 
-  LogOut 
+  ShoppingCart,
+  Users,
+  LogOut
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -41,10 +41,9 @@ const Sidebar = () => {
             to={to}
             end={to === '/'}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
-                isActive
-                  ? 'bg-primary-800 text-white shadow-lg'
-                  : 'text-primary-200 hover:bg-primary-800/50 hover:text-white'
+              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${isActive
+                ? 'bg-primary-800 text-white shadow-lg'
+                : 'text-primary-200 hover:bg-primary-800/50 hover:text-white'
               }`
             }
           >
@@ -69,3 +68,5 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
