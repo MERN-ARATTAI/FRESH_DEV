@@ -1,122 +1,4 @@
-// import React, { useEffect, useState } from "react";
-// import { addToCart, getFeaturedProducts, getProductHomePage } from "../Api/interceptor";
-// import { useAll } from "../GlobalProvider/UsesContext";
-// import { FaRegHeart } from "react-icons/fa";
-// import { useNavigate, useParams } from "react-router-dom";
 
-// const Product = () => {
-//   const { addCart, setCartCount, Wishlist, addWishlist, removeFromWishlist } = useAll();
-
-
-//   const [homeproduct, setHomeProduct] = useState([]);
-//   // const [products, setProducts] = useState([])
-//   const navigate = useNavigate()
-//   const { subCategoryId } = useParams()
-
-//   const HomeProductPage = async () => {
-//     try {
-//       const HomeData = await getProductHomePage(subCategoryId);
-//       console.log("HomeData", HomeData);
-//       setHomeProduct(HomeData);
-//     } catch (error) {
-//       console.log("error", error.message);
-//     }
-//   };
-
-
-//   useEffect(() => {
-//     HomeProductPage();
-//   }, [subCategoryId]);
-
-//   const handleToCart = async (productId) => {
-//     try {
-//       const res = await addToCart(productId);
-//       if (!res.success) {
-//         setCartCount(prev => prev + 1);
-//       }
-//     } catch (error) {
-//       navigate('/');
-//     }
-//   };
-
-//   const toggleWishlist = (item) => {
-//     const exists = Wishlist.some((p) => p._id === item._id);
-//     if (exists) {
-//       removeFromWishlist(item._id);
-//     } else {
-//       addWishlist(item);
-//     }
-//   };
-
-
-//   return (
-
-//     <div className="min-h-screen px-4 py-8">
-//       <p className="text-3xl font-bold mb-8 text-center">
-//         Our Most Buy Products
-//       </p>
-
-//       <div className="max-w-7xl mx-auto grid gap-8 
-//                   grid-cols-1 
-//                   sm:grid-cols-2 
-//                   md:grid-cols-3 
-//                   lg:grid-cols-4">
-//         {homeproduct.map((item) => (
-//           <div
-//             key={item._id}
-//             className="bg-white shadow-lg rounded-xl p-5 relative transition hover:shadow-xl"
-//           >
-//             {/* Wishlist */}
-//             <div
-//               onClick={() => toggleWishlist(item)}
-//               className={`absolute top-4 right-4 z-10 p-2 rounded-full shadow cursor-pointer transition
-//             ${Wishlist.some((p) => p._id === item._id)
-//                   ? "bg-red-100"
-//                   : "bg-white"
-//                 }`}
-//             >
-//               <FaRegHeart
-//                 className={`text-2xl transition-colors ${Wishlist.some((p) => p._id === item._id)
-//                   ? "text-red-500"
-//                   : "text-gray-500"
-//                   }`}
-//               />
-//             </div>
-
-//             {/* Image */}
-//             <div className="w-full h-87.5 overflow-hidden rounded-lg">
-//               <img
-//                 onClick={() => navigate(`/product/${item._id}`)}
-//                 src={item.image?.[0]?.url}
-//                 alt={item.name}
-//                 className="w-full h-full object-cover hover:scale-105 transition"
-//               />
-//             </div>
-
-//             {/* Info */}
-//             <p className="mt-2 font-semibold text-center text-lg">
-//               {item.name}
-//             </p>
-
-//             <div className="flex items-center justify-evenly p-2">
-//               <h2 className="text-l font-bold my-1">
-//                 ${item.price}
-//               </h2>
-
-//               <button
-//                 onClick={() => handleToCart(item._id)}
-//                 className="p-2 rounded-lg bg-amber-500 text-white font-semibold hover:bg-amber-700 transition"
-//               >
-//                 Add to Cart
-//               </button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-// export default Product;
 import React, { useEffect, useMemo, useState } from "react";
 import Api, { getProductHomePage, getData } from "../Api/interceptor";
 import { useAll } from "../GlobalProvider/UsesContext";
@@ -210,6 +92,8 @@ const ProductCard = ({ item, onAddToCart, onToggleWishlist, isInWishlist, onView
     </div>
   )
 }
+
+
 
 const Product = ({ pageMode = false }) => {
   const { Wishlist, handleAddToCart, handleAddToWishlist, handleRemoveFromWishlist } = useAll();
