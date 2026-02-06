@@ -13,6 +13,7 @@ import bannerRouter from './Routes/BannerRoute.js'
 import DashboardRouter from './Routes/DashboardRoute.js'
 import wishlistRouter from './Routes/WishlistRoute.js'
 import OrderRouter from './Routes/OrderRoute.js'
+import contactRouter from './Routes/ContactRoute.js'
 
 
 const app = express()
@@ -24,7 +25,7 @@ DatabaseConnection()
 //     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 //     allowedHeaders: ["Content-Type", "Authorization"]
 // }));
-app.use(cors())     
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
 
@@ -34,6 +35,7 @@ app.use('/api/user', UserRouter)
 app.use('/api/category', categoryRouter)
 app.use('/api/product', productRouter)
 app.use('/api/address', AddressRoutes)
+app.use('/api/contact', contactRouter)
 app.use('/api/subcategory', subCategoryRoutes)
 app.use('/api/cart', CartRoute)
 app.use('/api/banner', bannerRouter)
