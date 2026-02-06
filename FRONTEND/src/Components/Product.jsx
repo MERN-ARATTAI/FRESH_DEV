@@ -8,40 +8,8 @@ import toast from 'react-hot-toast';
 
 // Reusable product card used in both home (compact) and full-page list
 const ProductCard = ({ item, onAddToCart, onToggleWishlist, isInWishlist, onView }) => {
-  // return (
-  //   <div
-  //     key={item._id}
-  //     className="bg-white rounded-2xl p-4 relative shadow-md hover:shadow-xl transition-all duration-300"
-  //   >
-  //     <div
-  //       onClick={() => onToggleWishlist(item)}
-  //       className={`absolute top-4 right-4 z-10 p-2 rounded-full cursor-pointer backdrop-blur bg-white/90 shadow-md transition ${isInWishlist ? 'ring-2 ring-pink-400' : ''}`}>
-  //       {isInWishlist ? <FaHeart className="text-xl text-pink-500" /> : <FaRegHeart className="text-xl text-gray-500 hover:text-pink-500" />}
-  //     </div>
+  console.log("ProductCard", ProductCard)
 
-  //     <div className="w-full h-80 overflow-hidden rounded-xl bg-gray-50">
-  //       <img
-  //         onClick={() => onView(item)}
-  //         src={item.image?.[0]?.url || '/no-image.png'}
-  //         alt={item.name}
-  //         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-  //       />
-  //     </div>
-
-  //     <p className="mt-4 font-semibold text-center text-lg text-gray-800 truncate">{item.name}</p>
-
-  //     <div className="flex items-center justify-between mt-4 px-2">
-  //       <h2 className="text-lg font-bold text-gray-900">₹{item.price}</h2>
-
-  //       <button
-  //         onClick={() => onAddToCart(item._id)}
-  //         className="px-4 py-2 rounded-lg text-white font-semibold text-sm bg-gradient-to-r from-[#7b7cff] via-[#b695ff] to-[#f3b3ff] hover:opacity-90 transition"
-  //       >
-  //         Add to Cart
-  //       </button>
-  //     </div>
-  //   </div>
-  // )
   return (
     <div
       key={item._id}
