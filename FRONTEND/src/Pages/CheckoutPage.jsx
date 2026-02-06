@@ -325,7 +325,7 @@ const CheckoutPage = () => {
                         </svg>
                         Back to Cart
                     </button>
-                    <h1 className="text-4xl md:text-5xl font-bold text-[#0F172A] tracking-tight">Checkout</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold text-[#0F172A] tracking-tight">Checkout</h1>
                     <p className="text-[#0F172A] opacity-60 mt-2">Complete your order in a few simple steps</p>
                 </div>
 

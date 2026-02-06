@@ -5,6 +5,8 @@ import AxiosToastError from "../Utils/AxiosToastError";
 import toast from 'react-hot-toast';
 import { useAll } from "../GlobalProvider/UsesContext";
 import { useAuth } from "../GlobalProvider/AuthContext";
+import Product from "../Components/Product";
+
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -15,8 +17,6 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
     const [mainImg, setMainImg] = useState("");
     const [loading, setLoading] = useState(true);
-
-
 
     const getDeliveryDates = (days = 3) => {
         const start = new Date();
@@ -174,6 +174,8 @@ const ProductDetail = () => {
 
 
 
+
+ <>
 
   <div className="max-w-7xl mx-auto p-4 lg:p-6">
   <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
@@ -381,9 +383,19 @@ const ProductDetail = () => {
         </div>
       </div>
 
+
     </div>
   </div>
   </div>
+
+  <div>
+
+    <Product/>
+  </div>
+ 
+ 
+ </>
+
 
 
     );
