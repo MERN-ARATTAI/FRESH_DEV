@@ -3,7 +3,11 @@ import axios from 'axios'
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api"
 const Api = axios.create({
     baseURL: BASE_URL,
+<<<<<<< HEAD
 
+=======
+    //  
+>>>>>>> 59c6ceaa90678be1b1562d29a266b6275ad664f9
 })
 // welocme to the git
 Api.interceptors.request.use((config) => {
