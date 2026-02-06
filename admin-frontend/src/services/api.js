@@ -127,5 +127,9 @@ export const dashboardAPI = {
   getRecentOrders: () => api.get('/dashboard/recent-orders'),
   getTopProducts: () => api.get('/dashboard/top-products'),
 };
+export const contactApi = {
+  getAll: () => api.get('/contact/all'),
+  delete: (id) => api.delete(`/contact/${id}`)
+}
 
 export default api;

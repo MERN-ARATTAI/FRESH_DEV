@@ -15,6 +15,7 @@ import Categories from './pages/Categories';
 import Subcategories from './pages/Subcategories';
 import Orders from './pages/Orders';
 import Customers from './pages/Customers';
+import ContactAdminPage from './pages/Contact'
 
 // Protected Route Wrapper
 const ProtectedDashboard = ({ children }) => {
@@ -59,6 +60,7 @@ function App() {
           <Route path="/subcategories" element={<Subcategories />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/contact" element={<ContactAdminPage />} />
         </Route>
 
         {/* Redirect unknown routes to login */}

@@ -7,7 +7,8 @@ import {
   Tag,
   ShoppingCart,
   Users,
-  LogOut
+  LogOut,
+  Contact
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -21,6 +22,7 @@ const Sidebar = () => {
     { to: '/subcategories', icon: Tag, label: 'Subcategories' },
     { to: '/orders', icon: ShoppingCart, label: 'Orders' },
     { to: '/customers', icon: Users, label: 'Customers' },
+    { to: '/contact', icon: Contact, label: "Contact" }
   ];
 
   return (
