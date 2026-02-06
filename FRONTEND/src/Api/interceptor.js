@@ -3,7 +3,7 @@ import axios from 'axios'
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api"
 const Api = axios.create({
     baseURL: BASE_URL,
-    withCredentials: true
+
 })
 // welocme to the git
 Api.interceptors.request.use((config) => {
@@ -36,7 +36,7 @@ export const getLogin = async (data) => {
 }
 //Logout
 export const getLogout = async (data) => {
-    return await Api.get('/user/logout', { withCredentials: true })
+    return await Api.get('/user/logout',)
 }
 
 //subcategory
@@ -88,7 +88,7 @@ export const getEachProduct = async (id) => {
 }
 //add to cart 
 export const addToCart = async (productId) => {
-    const response = await Api.post('/cart/cart', { productId, quantity: 1 }, { withCredentials: true })
+    const response = await Api.post('/cart/cart', { productId, quantity: 1 },)
     console.log("Add to Cart Response", response);
     return response.data
 
@@ -97,19 +97,19 @@ export const addToCart = async (productId) => {
 
 //getCart
 export const getCart = async () => {
-    const response = await Api.get("/cart/getcart", { withCredentials: true })
+    const response = await Api.get("/cart/getcart",)
     return response.data
 }
 
 //updateCartqty
 export const updateCartqty = async (cartItemId, quantity) => {
-    const response = await Api.put("/cart/updatecart", { cartItemId, quantity }, { withCredentials: true });
+    const response = await Api.put("/cart/updatecart", { cartItemId, quantity },);
     return response.data
 }
 
 //removeCartQty
 export const removeCartItem = async (cartItemId) => {
-    const res = await Api.delete(`/cart/remove/${cartItemId}`, { withCredentials: true });
+    const res = await Api.delete(`/cart/remove/${cartItemId}`,);
     return res.data
 }
 // CREATE ADDRESS
@@ -117,7 +117,7 @@ export const postAddress = async (data) => {
     return Api.post(
         "/address",
         data,
-        { withCredentials: true }
+
     );
 };
 
@@ -125,7 +125,7 @@ export const postAddress = async (data) => {
 export const getAddress = async () => {
     return Api.get(
         "/address",
-        { withCredentials: true }
+
     );
 };
 // UPDATE ADDRESS
@@ -133,7 +133,7 @@ export const updateAddress = async (id, data) => {
     return Api.put(
         `/address/${id}`,
         data,
-        { withCredentials: true }
+
     );
 };
 
@@ -141,12 +141,12 @@ export const updateAddress = async (id, data) => {
 export const deleteAddress = async (id) => {
     return Api.delete(
         `/address/${id}`,
-        { withCredentials: true }
+
     );
 };
 //user auth
 export const userAuth = async () => {
-    const response = await Api.get("/user/me", { withCredentials: true });
+    const response = await Api.get("/user/me",);
     return response
 }
 
@@ -155,7 +155,7 @@ export const addToWishlist = async (productId) => {
     const response = await Api.post(
         "/wishlist/add",
         { productId },
-        { withCredentials: true }
+
     );
     return response.data;
 };
@@ -163,7 +163,7 @@ export const addToWishlist = async (productId) => {
 export const removeFromWishlist = async (productId) => {
     const response = await Api.delete(
         `/wishlist/remove/${productId}`,
-        { withCredentials: true }
+
     );
     return response.data;
 };
@@ -171,7 +171,7 @@ export const removeFromWishlist = async (productId) => {
 export const getWishlist = async () => {
     const response = await Api.get(
         "/wishlist",
-        { withCredentials: true }
+
     );
     return response.data;
 };
@@ -179,7 +179,7 @@ export const getWishlist = async () => {
 export const checkWishlist = async (productId) => {
     const response = await Api.get(
         `/wishlist/check/${productId}`,
-        { withCredentials: true }
+
     );
     return response.data;
 };
@@ -187,7 +187,7 @@ export const checkWishlist = async (productId) => {
 export const clearWishlist = async () => {
     const response = await Api.delete(
         "/wishlist/clear",
-        { withCredentials: true }
+
     );
     return response.data;
 };
