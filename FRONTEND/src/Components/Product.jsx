@@ -50,8 +50,8 @@ const ProductCard = ({ item, onAddToCart, onToggleWishlist, isInWishlist, onView
       <div
         onClick={() => onToggleWishlist(item)}
         className={`absolute top-4 right-4 z-10 p-2.5 rounded-full cursor-pointer transition-all duration-300 ${isInWishlist
-            ? 'bg-[#1D9C7A] shadow-lg scale-110'
-            : 'bg-white shadow-md hover:bg-[#F3F1EC] hover:scale-110'
+          ? 'bg-[#1D9C7A] shadow-lg scale-110'
+          : 'bg-white shadow-md hover:bg-[#F3F1EC] hover:scale-110'
           }`}
       >
         {isInWishlist ? (
@@ -277,7 +277,7 @@ const Product = ({ pageMode = false }) => {
       </div>
     )
   }
-//page mode
+  //page mode
   return (
     <div className="container mx-auto px-4 py-6">
       {/* Header Section */}
@@ -393,8 +393,8 @@ const Product = ({ pageMode = false }) => {
                 <label
                   key={s}
                   className={`px-4 py-2 border-2 rounded-lg cursor-pointer font-semibold transition-all duration-300 ${selectedSizes.includes(s)
-                      ? 'bg-[#1D9C7A] text-white border-[#1D9C7A] shadow-md transform scale-105'
-                      : 'bg-white text-[#0F172A] border-[#E4E3E7] hover:border-[#88C7B3] hover:scale-105'
+                    ? 'bg-[#1D9C7A] text-white border-[#1D9C7A] shadow-md transform scale-105'
+                    : 'bg-white text-[#0F172A] border-[#E4E3E7] hover:border-[#88C7B3] hover:scale-105'
                     }`}
                 >
                   <input

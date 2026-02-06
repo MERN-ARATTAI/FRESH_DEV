@@ -144,6 +144,13 @@ export const deleteAddress = async (id) => {
 
     );
 };
+//post Contavt Details
+export const createContact = (data) => {
+    return Api.post("/contact/create", data);
+};
+
+
+
 //user auth
 export const userAuth = async () => {
     const response = await Api.get("/user/me",);
