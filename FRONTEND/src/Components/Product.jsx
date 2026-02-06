@@ -213,7 +213,7 @@ const Product = ({ pageMode = false }) => {
   }
 
   // Handlers shared by both modes
-  const handleView = (item) => navigate(`/product/${item._id}`)
+  const handleView = (item) => { window.scrollTo(0, 0); navigate(`/product/${item._id}`) }
   const toggleWishlist = (item) => {
     const exists = wishlistProductIds.has(item._id)
     if (exists) {
@@ -532,7 +532,7 @@ const Product = ({ pageMode = false }) => {
 
                   <div className="mt-3 flex items-center gap-2">
                     <button
-                      onClick={() => navigate(`/product/${p._id}`)}
+                      onClick={() => { window.scrollTo(0, 0); navigate(`/product/${p._id}`) }}
                       className="flex-1 px-3 py-2 border-2 border-[#1D9C7A] text-[#1D9C7A] rounded-lg font-semibold hover:bg-[#1D9C7A] hover:text-white transition-all duration-300 transform hover:scale-105"
                     >
                       View

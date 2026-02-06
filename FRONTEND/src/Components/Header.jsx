@@ -260,7 +260,7 @@ const Header = () => {
                                 <FaRegHeart
                                     size={24}
                                     className="text-[#0F172A] hover:text-[#1D9C7A]"
-                                    onClick={() => navigate("/pages/WishListPage")}
+                                    onClick={() => { window.scrollTo(0, 0); navigate("/pages/WishListPage") }}
                                 />
                                 {wishlistCount > 0 && (
                                     <span className="absolute -top-2 -right-2 text-xs bg-[#1D9C7A] text-white rounded-full px-1">
