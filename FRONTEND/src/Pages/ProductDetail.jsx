@@ -146,7 +146,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Price Section */}
-            <div className="bg-gradient-to-br from-[#1D9C7A]/10 to-[#88C7B3]/10 p-4 rounded-xl border border-[#1D9C7A]/30">
+            {/* <div className="bg-gradient-to-br from-[#1D9C7A]/10 to-[#88C7B3]/10 p-4 rounded-xl border border-[#1D9C7A]/30">
               <div className="flex items-baseline gap-2">
                 <span className="text-sm text-[#88C7B3] font-semibold">Price:</span>
                 <p className="text-3xl font-bold text-[#0F172A]">
@@ -154,7 +154,32 @@ const ProductDetail = () => {
                 </p>
               </div>
               <p className="text-xs text-[#88C7B3] mt-1 font-medium">Inclusive of all taxes</p>
-            </div>
+            </div> */}
+            <div className="bg-gradient-to-br from-[#1D9C7A]/10 to-[#88C7B3]/10 p-4 rounded-xl border border-[#1D9C7A]/30">
+  <div className="flex items-baseline gap-2">
+    <span className="text-sm text-[#88C7B3] font-semibold">Price:</span>
+    <div className="flex items-baseline gap-2">
+      {product?.discount ? (
+        <>
+          <p className="text-3xl font-bold text-[#1D9C7A]">
+            ₹{(product.price - (product.price * product.discount / 100)).toFixed(2)}
+          </p>
+          <p className="text-lg font-medium text-[#88C7B3] line-through">
+            ₹{product.price}
+          </p>
+          <span className="ml-1 px-2 py-0.5 bg-[#1D9C7A] text-white text-xs font-bold rounded-full">
+            {product.discount}% OFF
+          </span>
+        </>
+      ) : (
+        <p className="text-3xl font-bold text-[#0F172A]">
+          ₹{product?.price}
+        </p>
+      )}
+    </div>
+  </div>
+  <p className="text-xs text-[#88C7B3] mt-1 font-medium">Inclusive of all taxes</p>
+</div>
 
             {/* Stock Status */}
             <div className="flex items-center gap-2">
