@@ -65,7 +65,7 @@ const CategoryCart = () => {
   const { Category } = useAll();
 
   return (
-    <div className="w-full py-8 bg-gradient-to-b from-[#F3F1EC] to-white">
+    <div className="w-full py-8 bg-gradient-to-b from-[#F3F1EC] to-white -z-50">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-8 text-center">
@@ -90,7 +90,7 @@ const CategoryCart = () => {
                   style={{
                     animationDelay: `${index * 100}ms`,
                   }}
-                >
+                >     
                   {/* Responsive Circle with enhanced styling */}
                   <div
                     className="
