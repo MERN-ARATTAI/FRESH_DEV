@@ -203,7 +203,7 @@ const MyOrders = () => {
   <div className="max-w-6xl mx-auto">
     {/* Header */}
     <div className="mb-8">
-      <h1 className="text-4xl md:text-5xl font-bold text-[#0F172A] mb-2">My Orders</h1>
+      <h1 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-2">My Orders</h1>
       <div className="w-24 h-1.5 bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] rounded-full"></div>
       <p className="mt-3 text-[#88C7B3] font-medium">Track and manage your purchases</p>
     </div>

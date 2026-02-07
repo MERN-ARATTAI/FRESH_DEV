@@ -98,6 +98,52 @@ const BannerImage = () => {
                 )}
             </AnimatePresence>
         </div>
+
+
+
+
+//  <div className="relative w-full overflow-hidden bg-white">
+//    <AnimatePresence mode="wait">
+//      {banners[index].type === "image" ? (
+//             <motion.img
+//                 key={banners[index].url}
+//                 src={banners[index].url}
+//                 className="w-full h-auto block sm:h-screen sm:object-cover"
+//                 initial={{ opacity: 0, x: 50 }}
+//                 animate={{ opacity: 1, x: 0 }}
+//                 exit={{ opacity: 0, x: -50 }}
+//                 transition={{ duration: 0.8 }}
+//                 style={{ display: 'block' }}
+//             />
+//         ) : (
+//             <motion.div
+//                 key={banners[index].url}
+//                 className="relative w-full block"
+//                 initial={{ opacity: 0 }}
+//                 animate={{ opacity: 1 }}
+//                 exit={{ opacity: 0 }}
+//                 style={{ lineHeight: 0 }}
+//             >
+//                 <video
+//                     ref={videoRef}
+//                     src={banners[index].url}
+//                     autoPlay
+//                     muted
+//                     playsInline
+//                     onTimeUpdate={handleTimeUpdate}
+//                     onEnded={handleVideoEnd}
+//                     className="w-full h-auto block sm:h-screen sm:object-cover"
+//                     style={{ display: 'block' }}
+//                 />
+//             </motion.div>
+//         )}
+//     </AnimatePresence>
+// </div> 
+
+
+
+
+
     );
 };
 

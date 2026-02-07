@@ -65,21 +65,74 @@ const WishListPage = () => {
     };
 
     if (Wishlist.length === 0) {
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-                <div className="text-center">
-                    <FaHeart className="mx-auto mb-4 text-gray-300" size={80} />
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">Your Wishlist is Empty</h2>
-                    <p className="text-gray-500 mb-6">Start adding products to your wishlist!</p>
-                    <button
-                        onClick={() => navigate('/')}
-                        className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:opacity-90"
+return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#F8FDFB] to-[#E8F5F1] px-4">
+        <div className="text-center max-w-md">
+            {/* Animated Heart Icon */}
+            <div className="relative inline-block mb-5">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] rounded-full blur-xl opacity-20 animate-pulse"></div>
+                <div className="relative bg-white rounded-full p-6 shadow-lg">
+                    <FaHeart className="mx-auto text-[#BEDCD0]" size={48} />
+                </div>
+            </div>
+
+            {/* Heading */}
+            <h2 className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-2">
+                Your Wishlist is Empty
+            </h2>
+            
+            {/* Description */}
+            <p className="text-[#64748B] text-base mb-6 leading-relaxed">
+                Save your favorite items here and never lose track of what you love!
+            </p>
+
+            {/* CTA Button */}
+            <button
+                onClick={() => navigate('/')}
+                className="group relative px-6 py-2.5 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+            >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                    Continue Shopping
+                    <svg 
+                        className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
                     >
-                        Continue Shopping
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#88C7B3] to-[#1D9C7A] opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+            </button>
+
+            {/* Popular categories */}
+            <div className="mt-12 pt-8 border-t border-[#BEDCD0]">
+                <p className="text-sm text-[#64748B] mb-4">Popular categories</p>
+                <div className="flex flex-wrap justify-center gap-2">
+                    <button 
+                        onClick={() => navigate('/Product_Page')}
+                        className="px-4 py-2 text-sm bg-white text-[#1D9C7A] border border-[#BEDCD0] rounded-full hover:bg-[#BEDCD0] hover:text-[#0F172A] transition-all duration-200"
+                    >
+                        New Arrivals
+                    </button>
+                    <button 
+                        onClick={() => navigate('/Product_Page')}
+                        className="px-4 py-2 text-sm bg-white text-[#1D9C7A] border border-[#BEDCD0] rounded-full hover:bg-[#BEDCD0] hover:text-[#0F172A] transition-all duration-200"
+                    >
+                        Best Sellers
+                    </button>
+                    <button 
+                        onClick={() => navigate('/Product_Page')}
+                        className="px-4 py-2 text-sm bg-white text-[#1D9C7A] border border-[#BEDCD0] rounded-full hover:bg-[#BEDCD0] hover:text-[#0F172A] transition-all duration-200"
+                    >
+                        On Sale
                     </button>
                 </div>
             </div>
-        );
+        </div>
+    </div>
+);
+
     }
 
     return (
