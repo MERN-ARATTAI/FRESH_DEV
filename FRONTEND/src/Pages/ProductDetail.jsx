@@ -179,7 +179,7 @@ const ProductDetail = () => {
     </div>
   </div>
   <p className="text-xs text-[#88C7B3] mt-1 font-medium">Inclusive of all taxes</p>
-</div>
+           </div>
 
             {/* Stock Status */}
             <div className="flex items-center gap-2">
