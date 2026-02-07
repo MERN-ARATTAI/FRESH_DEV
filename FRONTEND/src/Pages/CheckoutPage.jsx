@@ -381,8 +381,8 @@ const CheckoutPage = () => {
                                         >
                                             <div className="flex items-start gap-4">
                                                 <div className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${selectedAddressId === addr._id
-                                                        ? 'border-[#1D9C7A] bg-[#1D9C7A]'
-                                                        : 'border-[#D5D5E1]'
+                                                    ? 'border-[#1D9C7A] bg-[#1D9C7A]'
+                                                    : 'border-[#D5D5E1]'
                                                     }`}>
                                                     {selectedAddressId === addr._id && (
                                                         <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
