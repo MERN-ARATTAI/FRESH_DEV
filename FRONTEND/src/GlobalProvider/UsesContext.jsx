@@ -165,8 +165,10 @@ const UsesContext = ({ children }) => {
     const fetchCart = async () => {
         try {
             const res = await getCart();
+
             setCartItems(res.data || [])
             setTotalAmount(res.totalAmount || 0)
+
             // console.log("fetchCart", res);
             // ✅ update global cart count HERE
             // setCartCount(Array.isArray(res.data) ? res.data.length : 0);

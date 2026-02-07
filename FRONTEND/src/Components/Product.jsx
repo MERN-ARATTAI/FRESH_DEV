@@ -11,53 +11,349 @@ const ProductCard = ({ item, onAddToCart, onToggleWishlist, isInWishlist, onView
   console.log("ProductCard", ProductCard)
 
   return (
-    <div
-      key={item._id}
-      className="bg-white rounded-2xl p-4 relative shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#E4E3E7]"
-    >
-      <div
-        onClick={() => onToggleWishlist(item)}
-        className={`absolute top-4 right-4 z-10 p-2.5 rounded-full cursor-pointer transition-all duration-300 ${isInWishlist
-          ? 'bg-[#1D9C7A] shadow-lg scale-110'
-          : 'bg-white shadow-md hover:bg-[#F3F1EC] hover:scale-110'
-          }`}
-      >
-        {isInWishlist ? (
-          <FaHeart className="text-xl text-white" />
+    // <div
+    //   key={item._id}
+    //   className="bg-white rounded-2xl p-4 relative shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#E4E3E7]"
+    // >
+    //   <div
+    //     onClick={() => onToggleWishlist(item)}
+    //     className={`absolute top-4 right-4 z-10 p-2.5 rounded-full cursor-pointer transition-all duration-300 ${isInWishlist
+    //       ? 'bg-[#1D9C7A] shadow-lg scale-110'
+    //       : 'bg-white shadow-md hover:bg-[#F3F1EC] hover:scale-110'
+    //       }`}
+    //   >
+    //     {isInWishlist ? (
+    //       <FaHeart className="text-xl text-white" />
+    //     ) : (
+    //       <FaRegHeart className="text-xl text-[#0F172A] hover:text-[#1D9C7A]" />
+    //     )}
+    //   </div>
+
+    //   <div className="w-full h-80 overflow-hidden rounded-xl bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] shadow-inner">
+    //     <img
+    //       onClick={() => onView(item)}
+    //       src={item.image?.[0]?.url || '/no-image.png'}
+    //       alt={item.name}
+    //       className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer"
+    //     />
+    //   </div>
+
+    //   <div className="mt-4 space-y-3">
+    //     <p className="font-bold text-center text-lg text-[#0F172A] truncate hover:text-[#1D9C7A] transition-colors">
+    //       {item.name}
+    //     </p>
+
+    //     <div className="flex items-center justify-between px-2 pt-2 border-t border-[#E4E3E7]">
+    //       <div className="flex flex-col">
+    //         <span className="text-xs text-[#88C7B3] font-medium">Price</span>
+    //         <h2 className="text-xl font-bold text-[#0F172A]">₹{item.price}</h2>
+    //       </div>
+
+    //       <button
+    //         onClick={() => onAddToCart(item._id)}
+    //         className="px-6 py-3 rounded-xl text-white font-bold text-sm bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] hover:from-[#88C7B3] hover:via-[#1D9C7A] hover:to-[#88C7B3] transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl"
+    //       >
+    //         Add to Cart
+    //       </button>
+    //     </div>
+    //   </div>
+    // </div>
+
+//     <div
+//   key={item._id}
+//   className="bg-white rounded-2xl p-4 relative shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#E4E3E7] hover:border-[#1D9C7A] group"
+// >
+//   {/* Wishlist Button */}
+//   <div
+//     onClick={() => onToggleWishlist(item)}
+//     className={`absolute top-4 right-4 z-10 p-2.5 rounded-full cursor-pointer transition-all duration-300 ${
+//       isInWishlist
+//         ? 'bg-[#1D9C7A] shadow-lg scale-110'
+//         : 'bg-white shadow-md hover:bg-[#F3F1EC] hover:scale-110'
+//     }`}
+//   >
+//     {isInWishlist ? (
+//       <FaHeart className="text-xl text-white" />
+//     ) : (
+//       <FaRegHeart className="text-xl text-[#0F172A] hover:text-[#1D9C7A]" />
+//     )}
+//   </div>
+
+//   {/* Discount Badge */}
+//   {item.discount && (
+//     <div className="absolute top-4 left-4 z-10 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse">
+//       {item.discount}% OFF
+//     </div>
+//   )}
+
+//   {/* Product Image */}
+//   <div className="w-full aspect-square overflow-hidden rounded-xl bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] shadow-inner">
+//     <img
+//       onClick={() => onView(item)}
+//       src={item.image?.[0]?.url || '/no-image.png'}
+//       alt={item.name}
+//       className="w-full h-full object-contain p-3 group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+//     />
+//   </div>
+
+//   {/* Product Details */}
+//   <div className="mt-4 space-y-3">
+//     {/* Product Name */}
+//     <div className="text-center">
+//       <p className="font-bold text-lg text-[#0F172A] truncate group-hover:text-[#1D9C7A] transition-colors cursor-pointer">
+//         {item.name}
+//       </p>
+//       {item.brand && (
+//         <p className="text-xs text-[#88C7B3] font-medium mt-1">
+//           {item.brand}
+//         </p>
+//       )}
+//     </div>
+
+//     {/* Rating */}
+//     {item.rating && (
+//       <div className="flex items-center justify-center gap-1">
+//         <div className="flex items-center gap-1 bg-[#1D9C7A] text-white px-2 py-1 rounded-lg text-xs font-semibold">
+//           <span>{item.rating}</span>
+//           <span>★</span>
+//         </div>
+//       </div>
+//     )}
+
+//     {/* Price & Add to Cart Section */}
+//     <div className="pt-3 border-t border-[#E4E3E7]">
+//       {/* Price Display */}
+//       <div className="mb-3">
+//         {item.discount ? (
+//           <div className="text-center space-y-1">
+//             <div className="flex items-center justify-center gap-2">
+//               <h2 className="text-2xl font-bold text-[#1D9C7A]">
+//                 ₹{(item.price - (item.price * item.discount / 100)).toFixed(2)}
+//               </h2>
+//               <span className="text-base font-medium text-[#88C7B3] line-through">
+//                 ₹{item.price}
+//               </span>
+//             </div>
+//             <p className="text-xs text-[#1D9C7A] font-semibold">
+//               You save ₹{(item.price * item.discount / 100).toFixed(2)}
+//             </p>
+//           </div>
+//         ) : (
+//           <div className="text-center">
+//             <span className="text-xs text-[#88C7B3] font-medium block mb-1">Price</span>
+//             <h2 className="text-2xl font-bold text-[#0F172A]">₹{item.price}</h2>
+//           </div>
+//         )}
+//       </div>
+
+//       {/* Add to Cart Button */}
+//       <button
+//         onClick={() => onAddToCart(item._id)}
+//         className="w-full px-6 py-3 rounded-xl text-white font-bold text-sm bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] hover:from-[#88C7B3] hover:via-[#1D9C7A] hover:to-[#88C7B3] transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl"
+//       >
+//         Add to Cart
+//       </button>
+//     </div>
+//   </div>
+// </div>
+
+//    <div
+//   key={item._id}
+//   className="bg-white rounded-2xl p-4 relative shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#E4E3E7] hover:border-[#1D9C7A] group"
+// >
+//   {/* Wishlist Button */}
+//   <div
+//     onClick={() => onToggleWishlist(item)}
+//     className={`absolute top-4 right-4 z-10 p-2.5 rounded-full cursor-pointer transition-all duration-300 ${
+//       isInWishlist
+//         ? 'bg-[#1D9C7A] shadow-lg scale-110'
+//         : 'bg-white shadow-md hover:bg-[#F3F1EC] hover:scale-110'
+//     }`}
+//   >
+//     {isInWishlist ? (
+//       <FaHeart className="text-xl text-white" />
+//     ) : (
+//       <FaRegHeart className="text-xl text-[#0F172A] hover:text-[#1D9C7A]" />
+//     )}
+//   </div>
+
+//   {/* Discount Badge */}
+//   {item.discount && (
+//     <div className="absolute top-4 left-4 z-10 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse">
+//       {item.discount}% OFF
+//     </div>
+//   )}
+
+//   {/* Product Image - Original Size */}
+//   <div className="w-full h-80 overflow-hidden rounded-xl bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] shadow-inner">
+//     <img
+//       onClick={() => onView(item)}
+//       src={item.image?.[0]?.url || '/no-image.png'}
+//       alt={item.name}
+//       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+//     />
+//   </div>
+
+//   {/* Product Details - Reduced Spacing */}
+//   <div className="mt-3 space-y-2">
+//     {/* Product Name */}
+//     <div className="text-center">
+//       <p className="font-bold text-lg text-[#0F172A] truncate group-hover:text-[#1D9C7A] transition-colors cursor-pointer">
+//         {item.name}
+//       </p>
+//       {item.brand && (
+//         <p className="text-xs text-[#88C7B3] font-medium mt-0.5">
+//           {item.brand}
+//         </p>
+//       )}
+//     </div>
+
+//     {/* Rating */}
+//     {item.rating && (
+//       <div className="flex items-center justify-center gap-1">
+//         <div className="flex items-center gap-1 bg-[#1D9C7A] text-white px-2 py-0.5 rounded-lg text-xs font-semibold">
+//           <span>{item.rating}</span>
+//           <span>★</span>
+//         </div>
+//       </div>
+//     )}
+
+//     {/* Price & Add to Cart Section */}
+//     <div className="pt-2 border-t border-[#E4E3E7]">
+//       {/* Price Display */}
+//       <div className="mb-2">
+//         {item.discount ? (
+//           <div className="text-center space-y-0.5">
+//             <div className="flex items-center justify-center gap-2">
+//               <h2 className="text-2xl font-bold text-[#1D9C7A]">
+//                 ₹{(item.price - (item.price * item.discount / 100)).toFixed(2)}
+//               </h2>
+//               <span className="text-base font-medium text-[#88C7B3] line-through">
+//                 ₹{item.price}
+//               </span>
+//             </div>
+//             <p className="text-xs text-[#1D9C7A] font-semibold">
+//               You save ₹{(item.price * item.discount / 100).toFixed(2)}
+//             </p>
+//           </div>
+//         ) : (
+//           <div className="text-center">
+//             <span className="text-xs text-[#88C7B3] font-medium block mb-0.5">Price</span>
+//             <h2 className="text-2xl font-bold text-[#0F172A]">₹{item.price}</h2>
+//           </div>
+//         )}
+//       </div>
+
+//       {/* Add to Cart Button */}
+//       <button
+//         onClick={() => onAddToCart(item._id)}
+//         className="w-full px-6 py-3 rounded-xl text-white font-bold text-sm bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] hover:from-[#88C7B3] hover:via-[#1D9C7A] hover:to-[#88C7B3] transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl"
+//       >
+//         Add to Cart
+//       </button>
+//     </div>
+//   </div>
+// </div>
+
+<div
+  key={item._id}
+  className="bg-white rounded-2xl p-4 relative shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#E4E3E7] hover:border-[#1D9C7A] group"
+>
+  {/* Wishlist Button */}
+  <div
+    onClick={() => onToggleWishlist(item)}
+    className={`absolute top-4 right-4 z-10 p-2.5 rounded-full cursor-pointer transition-all duration-300 ${
+      isInWishlist
+        ? 'bg-[#1D9C7A] shadow-lg scale-110'
+        : 'bg-white shadow-md hover:bg-[#F3F1EC] hover:scale-110'
+    }`}
+  >
+    {isInWishlist ? (
+      <FaHeart className="text-xl text-white" />
+    ) : (
+      <FaRegHeart className="text-xl text-[#0F172A] hover:text-[#1D9C7A]" />
+    )}
+  </div>
+
+  {/* Discount Badge */}
+  {item.discount && (
+    <div className="absolute top-4 left-4 z-10 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse">
+      {item.discount}% OFF
+    </div>
+  )}
+
+  {/* Product Image - Original Size */}
+  <div className="w-full h-80 overflow-hidden rounded-xl bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] shadow-inner">
+    <img
+      onClick={() => onView(item)}
+      src={item.image?.[0]?.url || '/no-image.png'}
+      alt={item.name}
+      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+    />
+  </div>
+
+  {/* Product Details - Reduced Spacing */}
+  <div className="mt-3 space-y-2">
+    {/* Product Name */}
+    <div className="text-center">
+      <p className="font-bold text-lg text-[#0F172A] truncate group-hover:text-[#1D9C7A] transition-colors cursor-pointer">
+        {item.name}
+      </p>
+      {item.brand && (
+        <p className="text-xs text-[#88C7B3] font-medium mt-0.5">
+          {item.brand}
+        </p>
+      )}
+    </div>
+
+    {/* Rating */}
+    {item.rating && (
+      <div className="flex items-center justify-center gap-1">
+        <div className="flex items-center gap-1 bg-[#1D9C7A] text-white px-2 py-0.5 rounded-lg text-xs font-semibold">
+          <span>{item.rating}</span>
+          <span>★</span>
+        </div>
+      </div>
+    )}
+
+    {/* Price & Add to Cart Section */}
+    <div className="pt-2 border-t border-[#E4E3E7]">
+      {/* Price Display */}
+      <div className="mb-2">
+        {item.discount ? (
+          <div className="text-center space-y-0.5">
+            <div className="flex items-center justify-center gap-2">
+              <h2 className="text-2xl font-bold text-[#1D9C7A]">
+                ₹{(item.price - (item.price * item.discount / 100)).toFixed(2)}
+              </h2>
+              <span className="text-base font-medium text-[#88C7B3] line-through">
+                ₹{item.price}
+              </span>
+            </div>
+            <p className="text-xs text-[#1D9C7A] font-semibold">
+              You save ₹{(item.price * item.discount / 100).toFixed(2)}
+            </p>
+          </div>
         ) : (
-          <FaRegHeart className="text-xl text-[#0F172A] hover:text-[#1D9C7A]" />
+          <div className="text-center">
+            <span className="text-xs text-[#88C7B3] font-medium block mb-0.5">Price</span>
+            <h2 className="text-2xl font-bold text-[#0F172A]">₹{item.price}</h2>
+          </div>
         )}
       </div>
 
-      <div className="w-full h-80 overflow-hidden rounded-xl bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] shadow-inner">
-        <img
-          onClick={() => onView(item)}
-          src={item.image?.[0]?.url || '/no-image.png'}
-          alt={item.name}
-          className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer"
-        />
-      </div>
-
-      <div className="mt-4 space-y-3">
-        <p className="font-bold text-center text-lg text-[#0F172A] truncate hover:text-[#1D9C7A] transition-colors">
-          {item.name}
-        </p>
-
-        <div className="flex items-center justify-between px-2 pt-2 border-t border-[#E4E3E7]">
-          <div className="flex flex-col">
-            <span className="text-xs text-[#88C7B3] font-medium">Price</span>
-            <h2 className="text-xl font-bold text-[#0F172A]">₹{item.price}</h2>
-          </div>
-
-          <button
-            onClick={() => onAddToCart(item._id)}
-            className="px-6 py-3 rounded-xl text-white font-bold text-sm bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] hover:from-[#88C7B3] hover:via-[#1D9C7A] hover:to-[#88C7B3] transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
+      {/* Add to Cart Button - Improved */}
+      <button
+        onClick={() => onAddToCart(item._id)}
+        className="w-full px-6 py-3 rounded-xl text-white font-bold text-sm bg-[#1D9C7A] hover:bg-[#16875E] active:bg-[#0F5D42] transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-md hover:shadow-xl"
+      >
+        Add to Cart
+      </button>
     </div>
+  </div>
+</div>
+
+    
   )
 }
 
