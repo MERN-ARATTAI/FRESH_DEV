@@ -79,11 +79,21 @@ export const getCartProduct = async (req, res) => {
             user: userId,
             status: "Active"
         })
-            .populate("product", "name image price stock").sort({ createdAt: -1 });
-        const totalAmount = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
+            .populate("product", "name image price stock discount").sort({ createdAt: -1 });
+        const totalAmount = cartItems.reduce((sum, item) => {
+            const price = Number(item.product?.price) || 0;
+            const discount = Number(item.product?.discount) || 0;
+            const quantity = Number(item.quantity) || 1;
+
+            const discountedPrice = price - (price * discount) / 100;
+            const itemTotal = discountedPrice * quantity;
+
+            return sum + itemTotal;
+        }, 0);
         return res.json({
             success: true,
-            data: cartItems, totalAmount
+            data: cartItems,
+            totalAmount: totalAmount.toFixed(2)
         })
     } catch (error) {
         return res.status(500).json({
