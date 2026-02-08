@@ -12,9 +12,9 @@ const Home = () => {
 
 
             {/* BANNER */}
-            <div className=" mt-3 min-h-[60vh] md:min-h-screen">
+            {/* <div className=" mt-3 min-h-[60vh] md:min-h-screen"> */}
                 <BannerImage />
-            </div>
+            {/* </div> */}
 
             {/* CATEGORY SLIDER */}
 
