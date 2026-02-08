@@ -2,8 +2,8 @@ import axios from 'axios'
 
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api"
 const Api = axios.create({
-    // baseURL: BASE_URL,
-    baseURL: "https://fresh-dev.onrender.com/api",
+    baseURL: BASE_URL,
+    // baseURL: "https://fresh-dev.onrender.com/api",
 
 })
 // welocme to the git
