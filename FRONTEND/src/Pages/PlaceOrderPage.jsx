@@ -625,7 +625,7 @@ const PlaceOrderPage = () => {
                                                     {item.quantity}
                                                 </span>
                                                 {item.discount > 0 && (
-                                                    <span className="absolute -top-2 -left-2 bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold shadow-lg">
+                                                    <span className="absolute -top-2 -left-4 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white px-2 py-0.5 rounded-full md:text-[10px] text-[10px] font-bold shadow-lg">
                                                         {item.discount}% OFF
                                                     </span>
                                                 )}
@@ -656,7 +656,7 @@ const PlaceOrderPage = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className="text-right flex flex-col justify-center">
+                                            {/* <div className="text-right flex flex-col justify-center">
                                                 {item.discount > 0 && (
                                                     <p className="text-gray-400 line-through text-sm mb-1">
                                                         ₹{(item.price * item.quantity).toLocaleString('en-IN')}
@@ -665,7 +665,7 @@ const PlaceOrderPage = () => {
                                                 <p className="font-bold text-[#0F172A] text-lg">
                                                     ₹{Math.round(totalItemPrice).toLocaleString('en-IN')}
                                                 </p>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     );
                                 })}

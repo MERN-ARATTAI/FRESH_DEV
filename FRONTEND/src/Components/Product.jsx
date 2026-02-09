@@ -1658,112 +1658,114 @@ const Product = ({ pageMode = false }) => {
 
         {/* Products Grid */}
         <section className="lg:col-span-3">
-          <div className="flex items-center justify-between mb-6 bg-gradient-to-r from-[#F3F1EC] to-[#E4E3E7] p-4 rounded-xl">
-            <div className="flex items-center gap-3">
-              <div className="hidden md:block">
-                <p className="text-sm font-semibold text-[#0F172A]">{displayed.length} products found</p>
+  <div className="flex items-center justify-between mb-4 sm:mb-6 bg-gradient-to-r from-[#F3F1EC] to-[#E4E3E7] p-3 sm:p-4 rounded-lg sm:rounded-xl">
+    <div className="flex items-center gap-3">
+      <div className="hidden md:block">
+        <p className="text-xs sm:text-sm font-semibold text-[#0F172A]">{displayed.length} products found</p>
+      </div>
+    </div>
+    <div>
+      <p className="text-xs sm:text-sm font-medium text-[#88C7B3]">Showing {displayed.length} products</p>
+    </div>
+  </div>
+
+  {loading ? (
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-2.5 sm:p-4 flex flex-col animate-pulse border border-[#E4E3E7]">
+          <div className="h-40 sm:h-48 md:h-56 mb-3 sm:mb-4 bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] rounded-lg sm:rounded-xl" />
+          <div className="flex-1 space-y-2 sm:space-y-3">
+            <div className="h-3 sm:h-4 bg-[#E4E3E7] w-3/4 rounded" />
+            <div className="h-2 sm:h-3 bg-[#D5D5E1] w-1/2 rounded" />
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+      {displayed.map(p => (
+        <div
+          key={p._id}
+          className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-2 sm:p-3 flex flex-col hover:shadow-2xl transition-all duration-300 border border-[#E4E3E7] hover:border-[#1D9C7A] transform hover:scale-103 group"
+        >
+          <div className="relative aspect-square mb-2 sm:mb-3 bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] rounded-lg sm:rounded-xl overflow-hidden">
+            {p.discount ? (
+              <div className="absolute left-1.5 top-1.5 sm:left-2 sm:top-2 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white text-[9px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-lg z-10">
+                {p.discount}% OFF
               </div>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-[#88C7B3]">Showing {displayed.length} products</p>
+            ) : null}
+
+            {/* Wishlist Heart Icon */}
+            <button
+              onClick={() => toggleWishlist(p)}
+              className="absolute right-1.5 top-1.5 sm:right-2 sm:top-2 z-10 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300"
+            >
+              {wishlistProductIds.has(p._id) ? (
+                <FaHeart className="text-[#1D9C7A] text-sm sm:text-base md:text-lg" />
+              ) : (
+                <FaRegHeart className="text-[#88C7B3] text-sm sm:text-base md:text-lg hover:text-[#1D9C7A]" />
+              )}
+            </button>
+
+            <img
+              src={p.image?.[0]?.url || '/no-image.png'}
+              alt={p.name}
+              className="w-full h-full object-contain p-1 sm:p-2 group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          <div className="flex-1">
+            <h3 className="font-bold text-xs sm:text-sm md:text-base mb-0.5 sm:mb-1 line-clamp-1 sm:line-clamp-2 text-[#0F172A] group-hover:text-[#1D9C7A] transition-colors duration-300">
+              {p.name}
+            </h3>
+            <p className="text-[10px] sm:text-xs md:text-sm text-[#88C7B3] mb-1.5 sm:mb-2 truncate font-medium">
+              {p.brand || 'No Brand'}
+            </p>
+
+            <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+              <div>
+                {p.discount ? (
+                  <>
+                    <div className="text-sm sm:text-lg md:text-xl font-bold text-[#1D9C7A]">
+                      ₹{(p.price - (p.price * p.discount / 100)).toFixed(2)}
+                    </div>
+                    <div className="text-[10px] sm:text-xs md:text-sm text-[#88C7B3] line-through">
+                      ₹{p.price}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm sm:text-lg md:text-xl font-bold text-[#0F172A]">
+                    ₹{p.price}
+                  </div>
+                )}
+              </div>
+              <div className="text-[10px] sm:text-xs md:text-sm font-semibold text-[#1D9C7A] bg-[#F3F1EC] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md sm:rounded-lg">
+                {p.rating ? `${p.rating}★` : 'N/A'}
+              </div>
             </div>
           </div>
 
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl shadow-lg p-4 flex flex-col animate-pulse border border-[#E4E3E7]">
-                  <div className="h-56 mb-4 bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] rounded-xl" />
-                  <div className="flex-1 space-y-3">
-                    <div className="h-4 bg-[#E4E3E7] w-3/4 rounded" />
-                    <div className="h-3 bg-[#D5D5E1] w-1/2 rounded" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayed.map(p => (
-                <div
-                  key={p._id}
-                  className="bg-white rounded-2xl shadow-lg p-3 flex flex-col hover:shadow-2xl transition-all duration-300 border border-[#E4E3E7] hover:border-[#1D9C7A] transform hover:scale-103 group"
-                >
-                  <div className="relative aspect-square mb-3 bg-gradient-to-br from-[#F3F1EC] to-[#E4E3E7] rounded-xl overflow-hidden">
-                    {p.discount ? (
-                      <div className="absolute left-2 top-2 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg z-10 animate-pulse">
-                        {p.discount}% OFF
-                      </div>
-                    ) : null}
+          <div className="mt-1.5 sm:mt-2 flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2">
+            <button
+              onClick={() => { window.scrollTo(0, 0); navigate(`/product/${p._id}`) }}
+              className="w-full sm:flex-1 px-2 sm:px-3 py-1.5 sm:py-2 border-2 border-[#1D9C7A] text-[#1D9C7A] rounded-lg font-semibold text-[10px] sm:text-sm hover:bg-[#1D9C7A] hover:text-white transition-all duration-300 transform hover:scale-105"
+            >
+              View
+            </button>
+            <button
+              onClick={() => handleAddToCart(p._id)}
+              className="w-full sm:flex-1 px-2 sm:px-3 py-1.5 sm:py-2 bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] text-white rounded-lg font-semibold text-[10px] sm:text-sm hover:from-[#88C7B3] hover:via-[#1D9C7A] hover:to-[#88C7B3] transition-all duration-300 shadow-md hover:shadow-xl transform hover:scale-105"
+            >
+              Add to cart
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</section>     
 
-                    {/* Wishlist Heart Icon */}
-                    <button
-                      onClick={() => toggleWishlist(p)}
-                      className="absolute right-2 top-2 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300"
-                    >
-                      {wishlistProductIds.has(p._id) ? (
-                        <FaHeart className="text-[#1D9C7A] text-lg" />
-                      ) : (
-                        <FaRegHeart className="text-[#88C7B3] text-lg hover:text-[#1D9C7A]" />
-                      )}
-                    </button>
-
-                    <img
-                      src={p.image?.[0]?.url || '/no-image.png'}
-                      alt={p.name}
-                      className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-
-                  <div className="flex-1">
-                    <h3 className="font-bold text-base mb-1 truncate text-[#0F172A] group-hover:text-[#1D9C7A] transition-colors duration-300">
-                      {p.name}
-                    </h3>
-                    <p className="text-sm text-[#88C7B3] mb-2 truncate font-medium">
-                      {p.brand || 'No Brand'}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-2">
-                      <div>
-                        {p.discount ? (
-                          <>
-                            <div className="text-xl font-bold text-[#1D9C7A]">
-                              ₹{(p.price - (p.price * p.discount / 100)).toFixed(2)}
-                            </div>
-                            <div className="text-sm text-[#88C7B3] line-through">
-                              ₹{p.price}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="text-xl font-bold text-[#0F172A]">
-                            ₹{p.price}
-                          </div>
-                        )}
-                      </div>
-                      <div className="text-sm font-semibold text-[#1D9C7A] bg-[#F3F1EC] px-2 py-1 rounded-lg">
-                        {p.rating ? `${p.rating}★` : 'N/A'}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-2 flex items-center gap-2">
-                    <button
-                      onClick={() => { window.scrollTo(0, 0); navigate(`/product/${p._id}`) }}
-                      className="flex-1 px-3 py-2 border-2 border-[#1D9C7A] text-[#1D9C7A] rounded-lg font-semibold hover:bg-[#1D9C7A] hover:text-white transition-all duration-300 transform hover:scale-105"
-                    >
-                      View
-                    </button>
-                    <button
-                      onClick={() => handleAddToCart(p._id)}
-                      className="flex-1 px-3 py-2 bg-gradient-to-r from-[#1D9C7A] via-[#88C7B3] to-[#BEDCD0] text-white rounded-lg font-semibold hover:from-[#88C7B3] hover:via-[#1D9C7A] hover:to-[#88C7B3] transition-all duration-300 shadow-md hover:shadow-xl transform hover:scale-105"
-                    >
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>  
+        
       </div>
 
       {/* Mobile Filters Modal */}

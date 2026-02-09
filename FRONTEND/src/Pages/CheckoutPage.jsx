@@ -463,7 +463,7 @@ const CheckoutPage = () => {
         }, 0);
     };
 
-    const shippingCharge = 99;
+    const shippingCharge = 0;
     const taxRate = 0.18; // 18% GST
     const subtotal = calculateSubtotal();
     const tax = subtotal * taxRate;
@@ -541,12 +541,12 @@ const CheckoutPage = () => {
                         <div className="bg-white rounded-2xl shadow-lg p-6 border border-[#BEDCD0]/30">
                             <div className="flex justify-between items-center mb-6">
                                 <div>
-                                    <h2 className="text-2xl font-bold text-[#0F172A]">Delivery Address</h2>
+                                    <h2 className="md:text-2xl text-xl font-bold text-[#0F172A]">Delivery Address</h2>
                                     <p className="text-sm text-[#0F172A] opacity-60 mt-1">Where should we send your order?</p>
                                 </div>
                                 <button
                                     onClick={handleAddNewAddress}
-                                    className="bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                                    className="bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white md:px-5 px-3 md:py-2.5 py-1.5 rounded-xl md:text-[17px] text-[15px] font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center md:gap-2"
                                 >
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -653,7 +653,7 @@ const CheckoutPage = () => {
                                                     {item.quantity}
                                                 </span>
                                                 {item.discount > 0 && (
-                                                    <span className="absolute -top-2 -left-2 bg-red-500 text-white px-2 py-0.5 rounded-full text-xs font-bold shadow-lg">
+                                                    <span className="absolute -top-2 -left-2 bg-gradient-to-r from-[#1D9C7A] to-[#88C7B3] text-white px-2 py-0.5 rounded-full md:text-[13px] text-[11px] font-bold shadow-lg">
                                                         {item.discount}% OFF
                                                     </span>
                                                 )}
@@ -684,7 +684,7 @@ const CheckoutPage = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <div className="text-right flex flex-col justify-between">
+                                            {/* <div className="text-right flex flex-col justify-between">
                                                 {item.discount > 0 && (
                                                     <p className="text-gray-400 line-through text-sm">
                                                         ₹{(item.price * item.quantity).toLocaleString('en-IN')}
@@ -693,7 +693,7 @@ const CheckoutPage = () => {
                                                 <p className="font-bold text-[#0F172A] text-lg">
                                                     ₹{Math.round(totalItemPrice).toLocaleString('en-IN')}
                                                 </p>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     );
                                 })}
@@ -713,6 +713,7 @@ const CheckoutPage = () => {
                                 </div>
                                 <div className="flex justify-between text-[#0F172A] opacity-80">
                                     <span className="font-medium">Shipping</span>
+                                    <span className="text-[#1D9C7A] font-bold">FREE</span>
                                     <span className="font-semibold">₹{shippingCharge}</span>
                                 </div>
                                 <div className="flex justify-between text-[#0F172A] opacity-80">

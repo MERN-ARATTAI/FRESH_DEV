@@ -269,7 +269,7 @@ const OrderDetails = () => {
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {/* Customer Info */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 border border-[#BEDCD0]/30">
+          {/* <div className="bg-white rounded-2xl shadow-lg p-6 border border-[#BEDCD0]/30">
             <div className="flex items-center gap-3 mb-4 pb-4 border-b-2 border-[#E4E3E7]">
               <div className="w-10 h-10 bg-gradient-to-br from-[#1D9C7A] to-[#88C7B3] rounded-xl flex items-center justify-center shadow-md">
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -286,7 +286,45 @@ const OrderDetails = () => {
                 {order.shippingAddress?.address || order.shippingAddress || 'Address not provided'}
               </p>
             </div>
-          </div>
+          </div> */}
+          {/* Customer Info */}
+<div className="bg-white rounded-2xl shadow-lg p-6 border border-[#BEDCD0]/30">
+  <div className="flex items-center gap-3 mb-4 pb-4 border-b-2 border-[#E4E3E7]">
+    <div className="w-10 h-10 bg-gradient-to-br from-[#1D9C7A] to-[#88C7B3] rounded-xl flex items-center justify-center shadow-md">
+      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"/>
+      </svg>
+    </div>
+    <h3 className="font-bold text-xl text-[#0F172A]">Customer</h3>
+  </div>
+  <div className="space-y-2">
+    <p className="text-sm font-semibold text-[#0F172A]">
+      {order.user?.name || order.customer?.name || 'N/A'}
+    </p>
+    <div className="text-sm text-[#0F172A] opacity-70">
+      {order.shippingAddress?.address_line && (
+        <p>{order.shippingAddress.address_line}</p>
+      )}
+      {(order.shippingAddress?.city || order.shippingAddress?.state) && (
+        <p>
+          {order.shippingAddress.city}
+          {order.shippingAddress.city && order.shippingAddress.state && ', '}
+          {order.shippingAddress.state}
+        </p>
+      )}
+      {order.shippingAddress?.country && (
+        <p>{order.shippingAddress.country}</p>
+      )}
+      {order.shippingAddress?.pincode && (
+        <p>PIN: {order.shippingAddress.pincode}</p>
+      )}
+      {order.shippingAddress?.mobile && (
+        <p>Mobile: {order.shippingAddress.mobile}</p>
+      )}
+      {!order.shippingAddress && <p>Address not provided</p>}
+    </div>
+  </div>
+</div>
 
           {/* Order Summary */}
           <div className="bg-gradient-to-br from-[#1D9C7A]/10 to-[#88C7B3]/10 rounded-2xl shadow-lg p-6 border-2 border-[#1D9C7A]/30">
