@@ -1,8 +1,3 @@
-
-
-
-
-
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getCart, removeCartItem, updateCartqty } from '../Api/interceptor';
