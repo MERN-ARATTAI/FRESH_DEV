@@ -270,7 +270,7 @@ const Login = ({ onClose }) => {
       </div>
 
       {/* TOGGLE - Moved outside flex-1 container */}
-      <p className="text-center mt-4 text-sm text-[#0F172A]">
+      <p className="text-center mt-1 text-sm text-[#0F172A]">
         {isLogin ? "Don't have an account?" : "Already have an account?"}
         <span
           className="text-[#1D9C7A] cursor-pointer ml-1 font-bold hover:text-[#88C7B3] transition-colors"
