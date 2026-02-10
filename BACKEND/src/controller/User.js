@@ -46,6 +46,14 @@ export const Register = async (req, res) => {
         //     // Don't fail registration if email fails
         // }
 
+            try {
+      await sendWelcomeMail(email, name);
+      console.log("Welcome mail sent successfully");
+    } catch (emailError) {
+      console.error("Mail failed:", emailError.message);
+      // registration should NOT fail if mail fails
+    }
+
 
         res.status(201).json({
             message: "Register Successfully",
