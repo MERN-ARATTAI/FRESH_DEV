@@ -104,8 +104,10 @@ const transporterWithEnv = nodemailer.createTransport({
   secure: false,
   auth: {
     user: process.env.BREVO_SMTP_USER,
-    pass: process.env.BREVO_SMTP_KEY
+    pass: process.env.BREVO_SMTP_KEY 
   },
+
+  
 });
 
 export const sendWelcomeMail = async (email, name) => {
