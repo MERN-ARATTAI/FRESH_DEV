@@ -1,7 +1,8 @@
 import UserData from '../Models/PersonDetails.js';
 import jwt from 'jsonwebtoken';
-import { sendWelcomeMail } from '../Utils/Mailer.js';
+// import { sendWelcomeMail } from '../Utils/Mailer.js';
 import WishlistData from '../Models/WishlistDetails.js';
+import { sendWelcomeEmail } from '../Utils/Mailer.js';
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_TOKEN, { expiresIn: "25d" })
@@ -47,7 +48,7 @@ export const Register = async (req, res) => {
         // }
 
             try {
-      await sendWelcomeMail(email, name);
+      await sendWelcomeEmail(email,name);
       console.log("Welcome mail sent successfully");
     } catch (emailError) {
       console.error("Mail failed:", emailError.message);
