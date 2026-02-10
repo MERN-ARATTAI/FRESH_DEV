@@ -1,239 +1,4 @@
-// import React, { useState, useEffect } from 'react';
-// import {
-//   DollarSign,
-//   ShoppingCart,
-//   Package,
-//   Users,
-//   TrendingUp,
-//   ArrowUpRight,
-//   ArrowDownRight
-// } from 'lucide-react';
-// import { dashboardAPI } from '../services/api';
-// import { toast } from 'react-toastify';
 
-// const Dashboard = () => {
-//   const [stats, setStats] = useState(null);
-//   const [recentOrders, setRecentOrders] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     fetchDashboardData();
-//   }, []);
-
-//   const fetchDashboardData = async () => {
-//     try {
-//       console.log('📊 Fetching dashboard data...');
-//       const [statsRes, ordersRes] = await Promise.all([
-//         dashboardAPI.getStats(),
-//         dashboardAPI.getRecentOrders(),
-//       ]);
-
-//       const statsPayload = statsRes.data?.data || statsRes.data;
-//       setStats(statsPayload || null);
-
-//       // Normalize recent orders for UI
-//       const orders = ordersRes.data?.data || [];
-//       const normalized = (Array.isArray(orders) ? orders : []).map((o) => ({
-//         id: o._id,
-//         customer: o.user?.name || o.user?.email || 'N/A',
-//         amount: o.totalAmount || 0,
-//         status: o.orderStatus || o.status || 'pending',
-//         date: o.createdAt || o.createdAt,
-//       }));
-
-//       setRecentOrders(normalized);
-
-//       console.log('✅ Dashboard data loaded successfully');
-//     } catch (error) {
-//       console.error('❌ Failed to load dashboard data:', error);
-//       toast.error('Failed to load dashboard data: ' + (error.response?.data?.message || error.message));
-//       setRecentOrders([]); // Set empty array on error
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const statCards = [
-//     {
-//       title: 'Total Revenue (Paid)',
-//       value: stats?.formattedPaidRevenue || `₹0`,
-//       subtitle: `All orders: ${stats?.formattedTotalRevenue || '₹0'}`,
-//       change: '+12.5%',
-//       trend: 'up',
-//       icon: DollarSign,
-//       color: 'from-emerald-500 to-emerald-600',
-//     },
-//     {
-//       title: 'Total Orders',
-//       value: stats?.totalOrders ?? '0',
-//       change: '+8.2%',
-//       trend: 'up',
-//       icon: ShoppingCart,
-//       color: 'from-blue-500 to-blue-600',
-//     },
-//     {
-//       title: 'Total Products',
-//       value: stats?.totalProducts ?? '0',
-//       change: '+3.1%',
-//       trend: 'up',
-//       icon: Package,
-//       color: 'from-purple-500 to-purple-600',
-//     },
-//     {
-//       title: 'Total Customers',
-//       value: stats?.totalCustomers ?? '0',
-//       change: '-2.4%',
-//       trend: 'down',
-//       icon: Users,
-//       color: 'from-orange-500 to-orange-600',
-//     },
-//   ];
-
-//   if (loading) {
-//     return (
-//       <div className="flex items-center justify-center h-96">
-//         <div className="text-center">
-//           <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-primary-600 border-r-transparent"></div>
-//           <p className="mt-4 text-gray-600 font-medium">Loading dashboard...</p>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="space-y-6">
-//       {/* Page Header */}
-//       <div>
-//         <h1 className="text-3xl font-display font-bold text-gray-900">Dashboard</h1>
-//         <p className="text-gray-600 mt-1">Welcome back! Here's what's happening today.</p>
-//       </div>
-
-//       {/* Stats Grid */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-//         {statCards.map((stat, index) => (
-//           <div
-//             key={index}
-//             className="card group hover:shadow-glow transition-all duration-300"
-//           >
-//             <div className="card-body">
-//               <div className="flex items-start justify-between">
-//                 <div className="flex-1">
-//                   <p className="text-sm font-medium text-gray-600 mb-1">
-//                     {stat.title}
-//                   </p>
-//                   <p className="text-3xl font-display font-bold text-gray-900 mb-2">
-//                     {stat.value}
-//                   </p>
-//                   {stat.subtitle && (
-//                     <p className="text-sm text-gray-500 mt-1">{stat.subtitle}</p>
-//                   )}
-//                   <div className="flex items-center gap-1">
-//                     {stat.trend === 'up' ? (
-//                       <ArrowUpRight className="w-4 h-4 text-success-600" />
-//                     ) : (
-//                       <ArrowDownRight className="w-4 h-4 text-danger-600" />
-//                     )}
-//                     <span
-//                       className={`text-sm font-medium ${stat.trend === 'up' ? 'text-success-600' : 'text-danger-600'
-//                         }`}
-//                     >
-//                       {stat.change}
-//                     </span>
-//                     <span className="text-sm text-gray-500">vs last month</span>
-//                   </div>
-//                 </div>
-//                 <div
-//                   className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg`}
-//                 >
-//                   <stat.icon className="w-6 h-6 text-white" />
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Recent Orders */}
-//       <div className="card">
-//         <div className="card-header flex items-center justify-between">
-//           <div>
-//             <h2 className="text-xl font-display font-bold text-gray-900">
-//               Recent Orders
-//             </h2>
-//             <p className="text-sm text-gray-600 mt-1">Latest transactions from customers</p>
-//           </div>
-//           <button className="btn btn-secondary">View All</button>
-//         </div>
-//         <div className="card-body p-0">
-//           <div className="overflow-x-auto">
-//             <table className="w-full">
-//               <thead>
-//                 <tr className="border-b border-gray-100 bg-gray-50">
-//                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
-//                     Order ID
-//                   </th>
-//                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
-//                     Customer
-//                   </th>
-//                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
-//                     Amount
-//                   </th>
-//                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
-//                     Status
-//                   </th>
-//                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
-//                     Date
-//                   </th>
-//                 </tr>
-//               </thead>
-//               <tbody className="divide-y divide-gray-100">
-//                 {recentOrders.length > 0 ? (
-//                   recentOrders.map((order) => (
-//                     <tr key={order.id} className="hover:bg-gray-50 transition-colors">
-//                       <td className="px-6 py-4 whitespace-nowrap">
-//                         <span className="font-mono text-sm font-medium text-primary-600">
-//                           #{String(order.id).substring(0, 8)}
-//                         </span>
-//                       </td>
-//                       <td className="px-6 py-4 whitespace-nowrap">
-//                         <span className="text-sm text-gray-900">{order.customer}</span>
-//                       </td>
-//                       <td className="px-6 py-4 whitespace-nowrap">
-//                         <span className="text-sm font-semibold text-gray-900">
-//                           ₹{Number(order.amount || 0).toLocaleString()}
-//                         </span>
-//                       </td>
-//                       <td className="px-6 py-4 whitespace-nowrap">
-//                         <span className={`badge ${order.status === 'delivered' ? 'badge-success' :
-//                           order.status === 'shipped' ? 'badge-primary' :
-//                             order.status === 'pending' ? 'badge-warning' :
-//                               'badge-gray'
-//                           }`}>
-//                           {order.status}
-//                         </span>
-//                       </td>
-//                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-//                         {order.date ? new Date(order.date).toLocaleString() : 'N/A'}
-//                       </td>
-//                     </tr>
-//                   ))
-//                 ) : (
-//                   <tr>
-//                     <td colSpan="5" className="px-6 py-12 text-center text-gray-500">
-//                       No recent orders
-//                     </td>
-//                   </tr>
-//                 )}
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
 import React, { useState, useEffect } from 'react';
 import {
   DollarSign,
@@ -384,14 +149,16 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-6 sm:space-y-8 p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+    
+
+  <div className="space-y-6 sm:space-y-8 p-4 sm:p-6 lg:p-8 bg-[#F3F1EC] min-h-screen">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-tight">
             Dashboard
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 mt-1 sm:mt-2">
+          <p className="text-sm sm:text-base text-[#0F172A]/60 mt-1 sm:mt-2">
             Welcome back! Here's what's happening today.
           </p>
         </div>
@@ -401,17 +168,17 @@ const Dashboard = () => {
           <button
             onClick={handleRefresh}
             disabled={refreshing}
-            className="p-2 sm:p-2.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow disabled:opacity-50"
+            className="p-2 sm:p-2.5 bg-white border border-[#BEDCD0]/40 rounded-xl hover:bg-[#BEDCD0]/10 transition-all duration-200 shadow-sm hover:shadow disabled:opacity-50"
           >
-            <RefreshCw className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-600 ${refreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 sm:w-5 sm:h-5 text-[#0F172A] ${refreshing ? 'animate-spin' : ''}`} />
           </button>
-          <button className="p-2 sm:p-2.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow relative">
-            <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center font-bold">
+          <button className="p-2 sm:p-2.5 bg-white border border-[#BEDCD0]/40 rounded-xl hover:bg-[#BEDCD0]/10 transition-all duration-200 shadow-sm hover:shadow relative">
+            <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-[#0F172A]" />
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#1D9C7A] rounded-full text-white text-xs flex items-center justify-center font-bold">
               3
             </span>
           </button>
-          <button className="hidden sm:flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl font-medium">
+          <button className="hidden sm:flex items-center gap-2 px-4 py-2.5 bg-[#1D9C7A] text-white rounded-xl hover:bg-[#1D9C7A]/90 transition-all duration-200 shadow-lg hover:shadow-xl font-medium">
             <Download className="w-4 h-4" />
             <span>Export</span>
           </button>
@@ -420,86 +187,86 @@ const Dashboard = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {statCards.map((stat, index) => (
-          <div
-            key={index}
-            className="group relative bg-white rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200 overflow-hidden"
-          >
-            {/* Background Gradient Effect */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-
-            <div className="relative">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
-                  <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">
-                    {stat.title}
-                  </p>
-                  <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
-                    {stat.value}
-                  </p>
-                  {stat.subtitle && (
-                    <p className="text-xs sm:text-sm text-gray-500">{stat.subtitle}</p>
-                  )}
+        {statCards.map((stat, index) => {
+          const IconComponent = stat.icon;
+          return (
+            <div
+              key={index}
+              className="group relative bg-white rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-[#BEDCD0]/30 hover:border-[#88C7B3]/50 overflow-hidden"
+            >
+              <div className="relative">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <p className="text-xs sm:text-sm font-semibold text-[#0F172A]/60 uppercase tracking-wide mb-2">
+                      {stat.title}
+                    </p>
+                    <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] mb-1">
+                      {stat.value}
+                    </p>
+                    {stat.subtitle && (
+                      <p className="text-xs sm:text-sm text-[#0F172A]/50">{stat.subtitle}</p>
+                    )}
+                  </div>
+                  <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#1D9C7A] shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={2.5} />
+                  </div>
                 </div>
-                <div className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br ${stat.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={2.5} />
-                </div>
-              </div>
 
-              <div className="flex items-center gap-1.5 pt-3 border-t border-gray-100">
-                <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${stat.trend === 'up' ? 'bg-green-50' : 'bg-red-50'
-                  }`}>
-                  {stat.trend === 'up' ? (
-                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-600" />
-                  ) : (
-                    <ArrowDownRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-600" />
-                  )}
-                  <span className={`text-xs sm:text-sm font-bold ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                <div className="flex items-center gap-1.5 pt-3 border-t border-[#BEDCD0]/30">
+                  <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${stat.trend === 'up' ? 'bg-[#1D9C7A]/10' : 'bg-red-50'
                     }`}>
-                    {stat.change}
-                  </span>
+                    {stat.trend === 'up' ? (
+                      <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#1D9C7A]" />
+                    ) : (
+                      <ArrowDownRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-600" />
+                    )}
+                    <span className={`text-xs sm:text-sm font-bold ${stat.trend === 'up' ? 'text-[#1D9C7A]' : 'text-red-600'
+                      }`}>
+                      {stat.change}
+                    </span>
+                  </div>
+                  <span className="text-xs sm:text-sm text-[#0F172A]/50">vs last month</span>
                 </div>
-                <span className="text-xs sm:text-sm text-gray-500">vs last month</span>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Recent Orders */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-[#BEDCD0]/30 overflow-hidden">
         {/* Table Header */}
-        <div className="px-4 sm:px-6 lg:px-8 py-5 sm:py-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+        <div className="px-4 sm:px-6 lg:px-8 py-5 sm:py-6 border-b border-[#BEDCD0]/30 bg-[#F3F1EC]/50">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 flex items-center gap-2">
-                <Package className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" />
+              <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#0F172A] flex items-center gap-2">
+                <Package className="w-5 h-5 sm:w-6 sm:h-6 text-[#1D9C7A]" />
                 Recent Orders
               </h2>
-              <p className="text-xs sm:text-sm text-gray-600 mt-1">
+              <p className="text-xs sm:text-sm text-[#0F172A]/60 mt-1">
                 Latest transactions from customers
               </p>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
               {/* Search */}
-              <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg flex-1 sm:flex-initial sm:min-w-[200px]">
-                <Search className="w-4 h-4 text-gray-400" />
+              <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-[#F3F1EC] border border-[#BEDCD0]/40 rounded-xl flex-1 sm:flex-initial sm:min-w-[200px]">
+                <Search className="w-4 h-4 text-[#0F172A]/40" />
                 <input
                   type="text"
                   placeholder="Search orders..."
-                  className="bg-transparent border-none outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
+                  className="bg-transparent border-none outline-none text-sm text-[#0F172A] placeholder-[#0F172A]/40 w-full"
                 />
               </div>
 
               {/* Filter */}
-              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium text-gray-700">
+              <button className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#F3F1EC] border border-[#BEDCD0]/40 rounded-xl hover:bg-[#BEDCD0]/20 transition-colors text-sm font-medium text-[#0F172A]">
                 <Filter className="w-4 h-4" />
                 <span className="hidden sm:inline">Filter</span>
               </button>
 
               {/* View All */}
-              <button className="px-3 sm:px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg text-sm font-semibold">
+              <button className="px-3 sm:px-4 py-2 bg-[#1D9C7A] text-white rounded-xl hover:bg-[#1D9C7A]/90 transition-all duration-200 shadow-md hover:shadow-lg text-sm font-semibold">
                 View All
               </button>
             </div>
@@ -510,65 +277,65 @@ const Dashboard = () => {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-gray-50 border-b border-gray-100">
+              <tr className="bg-[#F3F1EC]/30 border-b border-[#BEDCD0]/30">
                 <th className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-left">
-                  <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-[#0F172A]/70 uppercase tracking-wider">
                     Order ID
                   </span>
                 </th>
                 <th className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-left">
-                  <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-[#0F172A]/70 uppercase tracking-wider">
                     Customer
                   </span>
                 </th>
                 <th className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-left">
-                  <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-[#0F172A]/70 uppercase tracking-wider">
                     Amount
                   </span>
                 </th>
                 <th className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-left">
-                  <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-[#0F172A]/70 uppercase tracking-wider">
                     Status
                   </span>
                 </th>
                 <th className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-left hidden lg:table-cell">
-                  <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-[#0F172A]/70 uppercase tracking-wider">
                     Date
                   </span>
                 </th>
                 <th className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-right">
-                  <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-[#0F172A]/70 uppercase tracking-wider">
                     Actions
                   </span>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[#BEDCD0]/20">
               {recentOrders.length > 0 ? (
                 recentOrders.map((order) => {
                   const statusConfig = getStatusConfig(order.status);
                   return (
                     <tr
                       key={order.id}
-                      className="hover:bg-gray-50 transition-colors group"
+                      className="hover:bg-[#F3F1EC]/30 transition-colors group"
                     >
                       <td className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 whitespace-nowrap">
-                        <span className="font-mono text-xs sm:text-sm font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">
+                        <span className="font-mono text-xs sm:text-sm font-semibold text-[#1D9C7A] bg-[#1D9C7A]/10 px-2 py-1 rounded-lg border border-[#1D9C7A]/20">
                           #{String(order.id).substring(0, 8)}
                         </span>
                       </td>
                       <td className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 whitespace-nowrap">
                         <div className="flex items-center gap-2 sm:gap-3">
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-md flex-shrink-0">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#88C7B3] flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-md flex-shrink-0">
                             {order.customer.charAt(0).toUpperCase()}
                           </div>
-                          <span className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+                          <span className="text-xs sm:text-sm font-medium text-[#0F172A] truncate">
                             {order.customer}
                           </span>
                         </div>
                       </td>
                       <td className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 whitespace-nowrap">
-                        <span className="text-xs sm:text-sm font-bold text-gray-900">
+                        <span className="text-xs sm:text-sm font-bold text-[#0F172A]">
                           ₹{Number(order.amount || 0).toLocaleString()}
                         </span>
                       </td>
@@ -578,18 +345,18 @@ const Dashboard = () => {
                         </span>
                       </td>
                       <td className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 whitespace-nowrap hidden lg:table-cell">
-                        <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600">
-                          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400" />
+                        <div className="flex items-center gap-1.5 text-xs sm:text-sm text-[#0F172A]/60">
+                          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0F172A]/40" />
                           {order.date ? new Date(order.date).toLocaleString() : 'N/A'}
                         </div>
                       </td>
                       <td className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 whitespace-nowrap text-right">
                         <div className="flex items-center justify-end gap-2">
-                          <button className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors opacity-0 group-hover:opacity-100">
-                            <Eye className="w-4 h-4 text-gray-600" />
+                          <button className="p-1.5 sm:p-2 hover:bg-[#BEDCD0]/20 rounded-lg transition-colors opacity-0 group-hover:opacity-100">
+                            <Eye className="w-4 h-4 text-[#0F172A]" />
                           </button>
-                          <button className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                            <MoreVertical className="w-4 h-4 text-gray-600" />
+                          <button className="p-1.5 sm:p-2 hover:bg-[#BEDCD0]/20 rounded-lg transition-colors">
+                            <MoreVertical className="w-4 h-4 text-[#0F172A]" />
                           </button>
                         </div>
                       </td>
@@ -599,13 +366,13 @@ const Dashboard = () => {
               ) : (
                 <tr>
                   <td colSpan="6" className="px-6 py-16 sm:py-20 text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
-                      <Package className="w-8 h-8 text-gray-400" />
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#F3F1EC] mb-4">
+                      <Package className="w-8 h-8 text-[#0F172A]/40" />
                     </div>
-                    <p className="text-sm sm:text-base text-gray-500 font-medium">
+                    <p className="text-sm sm:text-base text-[#0F172A]/60 font-medium">
                       No recent orders
                     </p>
-                    <p className="text-xs sm:text-sm text-gray-400 mt-1">
+                    <p className="text-xs sm:text-sm text-[#0F172A]/40 mt-1">
                       Orders will appear here once customers make purchases
                     </p>
                   </td>
@@ -617,24 +384,24 @@ const Dashboard = () => {
 
         {/* Pagination */}
         {recentOrders.length > 0 && (
-          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 border-t border-gray-100 bg-gray-50">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 border-t border-[#BEDCD0]/30 bg-[#F3F1EC]/30">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <p className="text-xs sm:text-sm text-gray-600">
-                Showing <span className="font-semibold text-gray-900">1</span> to{' '}
-                <span className="font-semibold text-gray-900">{recentOrders.length}</span> of{' '}
-                <span className="font-semibold text-gray-900">{recentOrders.length}</span> results
+              <p className="text-xs sm:text-sm text-[#0F172A]/60">
+                Showing <span className="font-semibold text-[#0F172A]">1</span> to{' '}
+                <span className="font-semibold text-[#0F172A]">{recentOrders.length}</span> of{' '}
+                <span className="font-semibold text-[#0F172A]">{recentOrders.length}</span> results
               </p>
               <div className="flex items-center gap-2">
-                <button className="px-3 py-2 border border-gray-300 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                <button className="px-3 py-2 border border-[#BEDCD0]/50 rounded-xl text-xs sm:text-sm font-medium text-[#0F172A] hover:bg-[#BEDCD0]/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
                   Previous
                 </button>
-                <button className="px-3 py-2 bg-indigo-600 text-white rounded-lg text-xs sm:text-sm font-medium hover:bg-indigo-700 transition-colors">
+                <button className="px-3 py-2 bg-[#1D9C7A] text-white rounded-xl text-xs sm:text-sm font-medium hover:bg-[#1D9C7A]/90 transition-colors">
                   1
                 </button>
-                <button className="px-3 py-2 border border-gray-300 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                <button className="px-3 py-2 border border-[#BEDCD0]/50 rounded-xl text-xs sm:text-sm font-medium text-[#0F172A] hover:bg-[#BEDCD0]/10 transition-colors">
                   2
                 </button>
-                <button className="px-3 py-2 border border-gray-300 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                <button className="px-3 py-2 border border-[#BEDCD0]/50 rounded-xl text-xs sm:text-sm font-medium text-[#0F172A] hover:bg-[#BEDCD0]/10 transition-colors">
                   Next
                 </button>
               </div>
@@ -643,6 +410,7 @@ const Dashboard = () => {
         )}
       </div>
     </div>
+
   );
 };
 
