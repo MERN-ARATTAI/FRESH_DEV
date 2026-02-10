@@ -136,4 +136,4 @@ export const sendTestEmail = async (toEmail, userName) => {
   };
 
   return transporter.sendMail(mailOptions);
-};
+};   
