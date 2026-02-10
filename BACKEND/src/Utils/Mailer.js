@@ -51,26 +51,91 @@
 //             .replace('{{otp}}', otp)
 //             .replace('{{email}}', email)
 //     })
+// import nodemailer from "nodemailer";
+
+// const transporter = nodemailer.createTransport({
+//   host: "smtp-relay.brevo.com",
+//   port: 587,
+//   secure: false,
+//   auth: {
+//     user: process.env.BREVO_EMAIL,     // login email
+//     pass: process.env.BREVO_SMTP_KEY,  // smtp key
+//   },
+// });
+
+// export const sendWelcomeMail = async (email, name) => {
+//   return await transporter.sendMail({
+//     from: `"MENZO" <${process.env.BREVO_EMAIL}>`,
+//     to: email,
+//     subject: "Welcome to MENZO 👋",
+//     html: `
+//       <h2>Hello ${name}</h2>
+//       <p>Your account has been created successfully.</p>
+//     `,
+//   });
+// };
+
+
+
 import nodemailer from "nodemailer";
+import 'dotenv/config';
 
 const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
   port: 587,
   secure: false,
   auth: {
-    user: process.env.BREVO_EMAIL,     // login email
-    pass: process.env.BREVO_SMTP_KEY,  // smtp key
+    user: "a20188001@smtp-brevo.com",  // Your SMTP login email
+    pass: "xsmtpsib-493e5bbf62c858e94f78d3fbf0b2d6b841f8b2ee1bd8389504ea6ee44ba02066-yNZPG5Gk5OTUIWJD"  // Your SMTP key
   },
 });
 
+// Or if you prefer using environment variables:
+// Make sure your .env file has these exact names:
+// BREVO_SMTP_USER=a20188001@smtp-brevo.com
+// BREVO_SMTP_KEY=xsmtpsib-...your-key-here
+
+const transporterWithEnv = nodemailer.createTransport({
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_KEY 
+  },
+
+  
+});
+
 export const sendWelcomeMail = async (email, name) => {
-  return await transporter.sendMail({
-    from: `"MENZO" <${process.env.BREVO_EMAIL}>`,
-    to: email,
-    subject: "Welcome to MENZO 👋",
-    html: `
-      <h2>Hello ${name}</h2>
-      <p>Your account has been created successfully.</p>
-    `,
-  });
+  try {
+    const info = await transporter.sendMail({
+      from: 'jshari.jr@gmail.com',  // Must match your verified sender
+      to: email,
+      subject: "Welcome to MENZO 👋",
+      html: `
+        <h2>Hello ${name}</h2>
+        <p>Your account has been created successfully.</p>
+        <p>Welcome to our fashion community!</p>
+      `,
+    });
+    console.log("Email sent:", info.messageId);
+    return info;
+  } catch (error) {
+    console.error("Email sending error:", error.message);
+    throw error;
+  }
 };
+
+// Alternative simpler version
+export const sendTestEmail = async (toEmail, userName) => {
+  const mailOptions = {
+    from: 'a20188001@smtp-brevo.com',
+    to: toEmail,
+    subject: 'Test from MENZO',
+    text: `Hello ${userName}, this is a test email from MENZO!`,
+    html: `<h1>Welcome ${userName}!</h1><p>This is a test email.</p>`
+  };
+
+  return transporter.sendMail(mailOptions);
+};   
