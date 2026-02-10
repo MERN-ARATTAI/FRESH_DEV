@@ -6,22 +6,31 @@ import {
 import 'dotenv/config';
 
 const transport = nodemailer.createTransport({
-    service: 'gmail',
+    host:"smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS
     }
 })
 
-const sendMail = (options) => transport.sendMail({
-    from: process.env.MAIL_USER,
-    ...options
-})
+const sendMail = async (options) => {
+    try {
+        const info = await transport.sendMail({
+            from: process.env.MAIL_USER,
+            ...options
+        });
+        console.log("Mail sent:", info.messageId);
+    } catch (error) {
+        console.error("Mail error:", error);
+    }
+};
 
 export const sendWelcomeMail = (email) =>
     sendMail({
         to: email,
-        subject: 'Welcome to Dressxx',
+        subject: 'Welcome to Menzo Mens Wear',
         text: `Account created with ${email}\nThank you for registering!`
     })
 

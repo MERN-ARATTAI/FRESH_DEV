@@ -37,7 +37,15 @@ export const Register = async (req, res) => {
             })
         }
         const user = await UserData.create({ ...req.body })
-        await sendWelcomeMail(email)
+                // Send email BEFORE responding (with error handling)
+        try {
+            await sendWelcomeMail(email)
+            console.log("Welcome mail sent successfully")
+        } catch (emailError) {
+            console.error("Mail failed:", emailError)
+            // Don't fail registration if email fails
+        }
+
 
         res.status(201).json({
             message: "Register Successfully",
@@ -45,6 +53,7 @@ export const Register = async (req, res) => {
             success: true,
             data: user
         })
+            
     }
     catch (error) {
         res.status(500).json({
