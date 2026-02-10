@@ -252,7 +252,7 @@ export const sendWelcomeEmail = async (email,name) => {
     const response = await axios.post(
       "https://api.brevo.com/v3/smtp/email",
       {
-        sender: { name, email: process.env.EMAIL_USER },
+        sender: { name:"Menzo", email: process.env.EMAIL_USER },
         to: [{ email, name }],
         subject: "Welcome to MENZO !!!",
         htmlContent: htmlContent,
