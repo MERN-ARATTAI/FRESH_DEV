@@ -296,11 +296,11 @@ const Product = ({ pageMode = false }) => {
             />
           ))}
         </div> */}
-        <div className="max-w-7xl mx-auto grid gap-2 xs:gap-3 sm:gap-4 md:gap-6 lg:gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-2 xs:px-3 sm:px-4 md:px-3 lg:px-2 xl:px-0">
-  {homeproduct.map(item => (
-    <ProductCard
+        <div className="max-w-7xl mx-auto grid gap-2 xs:gap-3 sm:gap-4 md:gap-6 lg:gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-0 xs:px-3 sm:px-4 md:px-3 lg:px-2 xl:px-0">
+  {homeproduct.map(item => (  
+    <ProductCard    
       key={item._id}
-      item={item}
+      item={item}   
       onAddToCart={handleAddToCart}
       onToggleWishlist={toggleWishlist}
       isInWishlist={wishlistProductIds.has(item._id)}
