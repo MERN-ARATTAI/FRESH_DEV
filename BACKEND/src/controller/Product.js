@@ -18,7 +18,7 @@ export const createProduct = async (req, res) => {
             discount,
             description,
             more_details,
-            isPublic
+            isPublic 
 
         } = req.body;
         if (!name || !price || !category) {
@@ -58,7 +58,7 @@ export const createProduct = async (req, res) => {
                 }
             }
         }
-
+           
         req.body.subCategory = sc;
 
         const product = await Product.create({

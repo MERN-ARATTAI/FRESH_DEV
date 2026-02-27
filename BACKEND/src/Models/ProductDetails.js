@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
         image: [
             {
                 url: String,
-                public_id: String
+                public_id: String 
             }
         ],
         brand: {

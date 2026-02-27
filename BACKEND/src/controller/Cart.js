@@ -43,7 +43,7 @@ export const addToCart = async (req, res) => {
                 success: true,
                 message: "cart Updated",
                 data: cartItem
-            })
+            }) 
         }
         const newCartItem = await CartProduct.create({
             user: userId,
@@ -70,38 +70,6 @@ export const addToCart = async (req, res) => {
     }
 }
 
-// export const getCartProduct = async (req, res) => {
-//     try {
-//         const userId = req.user._id
-//         // console.log(userId);
-
-//         const cartItems = await CartProduct.find({
-//             user: userId,
-//             status: "Active"
-//         })
-//             .populate("product", "name image price stock discount").sort({ createdAt: -1 });
-//         const totalAmount = cartItems.reduce((sum, item) => {
-//             const price = Number(item.product?.price) || 0;
-//             const discount = Number(item.product?.discount) || 0;
-//             const quantity = Number(item.quantity) || 1;
-
-//             const discountedPrice = price - (price * discount) / 100;
-//             const itemTotal = discountedPrice * quantity;
-
-//             return sum + itemTotal;
-//         }, 0);
-//         return res.json({
-//             success: true,
-//             data: cartItems,
-//             totalAmount: totalAmount.toFixed(2)
-//         })
-//     } catch (error) {
-//         return res.status(500).json({
-//             success: false,
-//             message: error.message
-//         });
-//     }
-// }
 export const getCartProduct = async (req, res) => {
     try {
         const userId = req.user._id
@@ -181,6 +149,7 @@ export const updateCartQuantity = async (req, res) => {
         });
     }
 }
+
 export const removeCartItem = async (req, res) => {
     try {
         const userId = req.user._id;

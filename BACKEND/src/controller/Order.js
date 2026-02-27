@@ -214,6 +214,7 @@ export const getAllOrders = async (req, res) => {
             { $match: { paymentStatus: "paid" } },
             { $group: { _id: null, total: { $sum: "$totalAmount" } } },
         ]);
+        
 
         const statusDistribution = await Order.aggregate([
             { $group: { _id: "$orderStatus", count: { $sum: 1 } } },

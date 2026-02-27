@@ -221,7 +221,7 @@ export const sendWelcomeEmail = async (email,name) => {
           <p>We're excited to have you as part of our community!</p>
           
           <p style="text-align: center;">
-            <a href="#" class="button">Get Started</a>
+            <a href="https://thebrandmenzo.netlify.app" class="button">Get Started</a>
           </p>
           
           <div class="info-box">

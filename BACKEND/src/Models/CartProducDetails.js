@@ -34,7 +34,7 @@ const cartProductSchema = new mongoose.Schema(
             type: String,
             enum: ["Active", "ordered"],
             default: "Active"
-        }
+        }  
     },
     { timestamps: true }
 );
